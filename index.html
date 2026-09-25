@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CivilCalcAI</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f2f5f9;
+  color:#222;
+}
+header{
+  background:#0d47a1;
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+}
+header h1{margin:0;font-size:32px;}
+header p{margin:8px 0 0;}
+
+.container{
+  max-width:600px;
+  margin:25px auto;
+  padding:15px;
+}
+.card{
+  background:white;
+  padding:22px;
+  margin-bottom:20px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+h2{color:#0d47a1;}
+label{
+  display:block;
+  margin-top:12px;
+  font-weight:bold;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  background:#0d47a1;
+  color:white;
+  border:0;
+  border-radius:8px;
+  font-size:17px;
+  font-weight:bold;
+}
+.result{
+  display:none;
+  margin-top:15px;
+  padding:14px;
+  background:#e3f2fd;
+  border-radius:8px;
+  font-weight:bold;
+}
+footer{
+  text-align:center;
+  padding:20px;
+  color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏗️ CivilCalcAI</h1>
+<p>AI-powered Civil Engineering Calculator</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>📐 Concrete Volume</h2>
+
+<label>Length (m)</label>
+<input id="length" type="number" placeholder="Example: 5">
+
+<label>Width (m)</label>
+<input id="width" type="number" placeholder="Example: 3">
+
+<label>Depth (m)</label>
+<input id="depth" type="number" placeholder="Example: 0.15">
+
+<button onclick="volume()">Calculate Volume</button>
+
+<div id="volumeResult" class="result"></div>
+</div>
+
+<div class="card">
+<h2>🧱 Brick Calculator</h2>
+
+<label>Wall Length (m)</label>
+<input id="wallLength" type="number" placeholder="Example: 5">
+
+<label>Wall Height (m)</label>
+<input id="wallHeight" type="number" placeholder="Example: 3">
+
+<button onclick="bricks()">Calculate Bricks</button>
+
+<div id="brickResult" class="result"></div>
+</div>
+
+</div>
+
+<footer>
+© 2026 CivilCalcAI
+</footer>
+
+<script>
+function volume(){
+  let l=Number(document.getElementById("length").value);
+  let w=Number(document.getElementById("width").value);
+  let d=Number(document.getElementById("depth").value);
+  let r=document.getElementById("volumeResult");
+
+  r.style.display="block";
+
+  if(l<=0 || w<=0 || d<=0){
+    r.innerHTML="⚠️ Please enter valid values.";
+    return;
+  }
+
+  let v=l*w*d;
+  r.innerHTML="✅ Concrete Volume = "+v.toFixed(3)+" m³";
+}
+
+function bricks(){
+  let l=Number(document.getElementById("wallLength").value);
+  let h=Number(document.getElementById("wallHeight").value);
+  let r=document.getElementById("brickResult");
+
+  r.style.display="block";
+
+  if(l<=0 || h<=0){
+    r.innerHTML="⚠️ Please enter valid values.";
+    return;
+  }
+
+  let b=l*h*50;
+  r.innerHTML="✅ Approx. Bricks Required = "+Math.ceil(b);
+}
+</script>
+
+</body>
+</html>
