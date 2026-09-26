@@ -880,4 +880,538 @@ function brickCalc(){
         "brickResult",
         "✅ Wall Volume = " + wallVolume.toFixed(3) +
         " m³<br>" +
-        "🧱 Approx. Bricks = 
+        "🧱 Approx. Bricks =         " + total +
+        " bricks<br>" +
+        "📦 With 5% wastage included."
+    );
+}
+
+
+/* -----------------------------
+   STEEL
+----------------------------- */
+
+function steelCalc(){
+
+    const d = getNum("steelDia");
+    const L = getNum("steelLength");
+
+    if(!validNumbers([d,L]) || d===0 || L===0){
+        showResult("steelResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const weightPerMeter = (d * d) / 162;
+    const totalWeight = weightPerMeter * L;
+
+    showResult(
+        "steelResult",
+        "✅ Weight per meter = " + weightPerMeter.toFixed(3) + " kg/m<br>" +
+        "🔩 Total Steel Weight = " + totalWeight.toFixed(3) + " kg"
+    );
+}
+
+
+/* -----------------------------
+   MATERIAL MIX
+----------------------------- */
+
+function mixCalc(){
+
+    const volume = getNum("mixVol");
+    const cement = getNum("cementRatio");
+    const sand = getNum("sandRatio");
+    const aggregate = getNum("aggRatio");
+
+    if(!validNumbers([volume,cement,sand,aggregate]) ||
+       volume===0 || (cement+sand+aggregate)===0){
+
+        showResult("mixResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const totalRatio = cement + sand + aggregate;
+
+    const cementVol = volume * cement / totalRatio;
+    const sandVol = volume * sand / totalRatio;
+    const aggregateVol = volume * aggregate / totalRatio;
+
+    showResult(
+        "mixResult",
+        "🏗️ Cement = " + cementVol.toFixed(3) + " m³<br>" +
+        "🏖️ Sand = " + sandVol.toFixed(3) + " m³<br>" +
+        "🪨 Aggregate = " + aggregateVol.toFixed(3) + " m³"
+    );
+}
+
+
+/* -----------------------------
+   COST
+----------------------------- */
+
+function costCalc(){
+
+    const cementQty = getNum("cementQty");
+    const cementRate = getNum("cementRate");
+
+    const sandQty = getNum("sandQty");
+    const sandRate = getNum("sandRate");
+
+    const aggQty = getNum("aggQty");
+    const aggRate = getNum("aggRate");
+
+    if(!validNumbers([
+        cementQty,cementRate,
+        sandQty,sandRate,
+        aggQty,aggRate
+    ])){
+        showResult("costResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const cementCost = cementQty * cementRate;
+    const sandCost = sandQty * sandRate;
+    const aggregateCost = aggQty * aggRate;
+
+    const totalCost = cementCost + sandCost + aggregateCost;
+
+    showResult(
+        "costResult",
+        "🧱 Cement Cost = ₹" + cementCost.toFixed(2) + "<br>" +
+        "🏖️ Sand Cost = ₹" + sandCost.toFixed(2) + "<br>" +
+        "🪨 Aggregate Cost = ₹" + aggregateCost.toFixed(2) + "<br><br>" +
+        "💰 Total Cost = ₹" + totalCost.toFixed(2)
+    );
+}
+
+
+/* -----------------------------
+   AREA FIELDS
+----------------------------- */
+
+function updateAreaFields(){
+
+    const shape = document.getElementById("areaShape").value;
+    const fields = document.getElementById("areaFields");
+
+    if(shape === "rectangle"){
+
+        fields.innerHTML = `
+            <label>Length (m)</label>
+            <input id="areaLength" type="number" step="any" placeholder="Example: 5">
+
+            <label>Width (m)</label>
+            <input id="areaWidth" type="number" step="any" placeholder="Example: 3">
+        `;
+
+    }else if(shape === "triangle"){
+
+        fields.innerHTML = `
+            <label>Base (m)</label>
+            <input id="areaBase" type="number" step="any" placeholder="Example: 5">
+
+            <label>Height (m)</label>
+            <input id="areaHeight" type="number" step="any" placeholder="Example: 3">
+        `;
+
+    }else if(shape === "circle"){
+
+        fields.innerHTML = `
+            <label>Radius (m)</label>
+            <input id="areaRadius" type="number" step="any" placeholder="Example: 3">
+        `;
+    }
+}
+
+
+/* -----------------------------
+   AREA
+----------------------------- */
+
+function areaCalc(){
+
+    const shape = document.getElementById("areaShape").value;
+    let area = 0;
+
+    if(shape === "rectangle"){
+
+        const L = getNum("areaLength");
+        const W = getNum("areaWidth");
+
+        if(!validNumbers([L,W]) || L===0 || W===0){
+            showResult("areaResult","⚠️ Please enter valid values.");
+            return;
+        }
+
+        area = L * W;
+
+    }else if(shape === "triangle"){
+
+        const B = getNum("areaBase");
+        const H = getNum("areaHeight");
+
+        if(!validNumbers([B,H]) || B===0 || H===0){
+            showResult("areaResult","⚠️ Please enter valid values.");
+            return;
+        }
+
+        area = 0.5 * B * H;
+
+    }else if(shape === "circle"){
+
+        const R = getNum("areaRadius");
+
+        if(!validNumbers([R]) || R===0){
+            showResult("areaResult","⚠️ Please enter valid values.");
+            return;
+        }
+
+        area = Math.PI * R * R;
+    }
+
+    showResult(
+        "areaResult",
+        "📐 Area = " + area.toFixed(3) + " m²"
+    );
+}
+
+
+/* -----------------------------
+   VOLUME FIELDS
+----------------------------- */
+
+function updateVolumeFields(){
+
+    const shape = document.getElementById("volumeShape").value;
+    const fields = document.getElementById("volumeFields");
+
+    if(shape === "cuboid"){
+
+        fields.innerHTML = `
+            <label>Length (m)</label>
+            <input id="volLength" type="number" step="any" placeholder="Example: 5">
+
+            <label>Width (m)</label>
+            <input id="volWidth" type="number" step="any" placeholder="Example: 3">
+
+            <label>Height (m)</label>
+            <input id="volHeight" type="number" step="any" placeholder="Example: 2">
+        `;
+
+    }else if(shape === "cylinder"){
+
+        fields.innerHTML = `
+            <label>Radius (m)</label>
+            <input id="volRadius" type="number" step="any" placeholder="Example: 2">
+
+            <label>Height (m)</label>
+            <input id="volCylHeight" type="number" step="any" placeholder="Example: 5">
+        `;
+    }
+}
+
+
+/* -----------------------------
+   VOLUME
+----------------------------- */
+
+function volumeCalc(){
+
+    const shape = document.getElementById("volumeShape").value;
+    let volume = 0;
+
+    if(shape === "cuboid"){
+
+        const L = getNum("volLength");
+        const W = getNum("volWidth");
+        const H = getNum("volHeight");
+
+        if(!validNumbers([L,W,H]) || L===0 || W===0 || H===0){
+            showResult("volumeResult","⚠️ Please enter valid values.");
+            return;
+        }
+
+        volume = L * W * H;
+
+    }else if(shape === "cylinder"){
+
+        const R = getNum("volRadius");
+        const H = getNum("volCylHeight");
+
+        if(!validNumbers([R,H]) || R===0 || H===0){
+            showResult("volumeResult","⚠️ Please enter valid values.");
+            return;
+        }
+
+        volume = Math.PI * R * R * H;
+    }
+
+    showResult(
+        "volumeResult",
+        "📦 Volume = " + volume.toFixed(3) + " m³"
+    );
+}
+
+
+/* -----------------------------
+   UNIT CONVERTER
+----------------------------- */
+
+function unitCalc(){
+
+    const value = getNum("unitValue");
+    const from = document.getElementById("unitFrom").value;
+    const to = document.getElementById("unitTo").value;
+
+    if(!Number.isFinite(value)){
+        showResult("unitResult","⚠️ Please enter a valid value.");
+        return;
+    }
+
+    const toMeter = {
+        meter: 1,
+        feet: 0.3048,
+        inch: 0.0254,
+        cm: 0.01
+    };
+
+    const result = value * toMeter[from] / toMeter[to];
+
+    showResult(
+        "unitResult",
+        "📏 " + value + " " + from +
+        " = " + result.toFixed(4) + " " + to
+    );
+}
+
+
+/* -----------------------------
+   REBAR
+----------------------------- */
+
+function rebarCalc(){
+
+    const d = getNum("rebarDia");
+    const L = getNum("rebarLength");
+    const bars = getNum("rebarBars");
+
+    if(!validNumbers([d,L,bars]) ||
+       d===0 || L===0 || bars===0){
+
+        showResult("rebarResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const weightPerMeter = (d * d) / 162;
+    const totalLength = L * bars;
+    const totalWeight = weightPerMeter * totalLength;
+
+    showResult(
+        "rebarResult",
+        "🔩 Weight per meter = " + weightPerMeter.toFixed(3) + " kg/m<br>" +
+        "📏 Total Length = " + totalLength.toFixed(2) + " m<br>" +
+        "⚖️ Total Rebar Weight = " + totalWeight.toFixed(3) + " kg"
+    );
+}
+
+
+/* -----------------------------
+   RCC BEAM
+----------------------------- */
+
+function beamCalc(){
+
+    const width = getNum("beamWidth");
+    const depth = getNum("beamDepth");
+    const length = getNum("beamLength");
+
+    if(!validNumbers([width,depth,length]) ||
+       width===0 || depth===0 || length===0){
+
+        showResult("beamResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const widthM = width / 1000;
+    const depthM = depth / 1000;
+
+    const volume = widthM * depthM * length;
+
+    showResult(
+        "beamResult",
+        "🏗️ RCC Beam Volume = " + volume.toFixed(3) + " m³"
+    );
+}
+
+
+/* -----------------------------
+   RESET
+----------------------------- */
+
+function resetCard(cardId){
+
+    const card = document.getElementById(cardId);
+
+    if(!card) return;
+
+    const inputs = card.querySelectorAll("input");
+
+    inputs.forEach(input => {
+        if(input.hasAttribute("value")){
+            input.value = input.getAttribute("value");
+        }else{
+            input.value = "";
+        }
+    });
+
+    const result = card.querySelector(".result");
+
+    if(result){
+        result.innerHTML = "Result will appear here.";
+    }
+
+    if(cardId === "area"){
+        updateAreaFields();
+    }
+
+    if(cardId === "volume"){
+        updateVolumeFields();
+    }
+}
+
+
+/* -----------------------------
+   SHARE
+----------------------------- */
+
+function shareResult(id){
+
+    const result = document.getElementById(id);
+
+    if(!result) return;
+
+    const text = result.innerText;
+
+    if(navigator.share){
+
+        navigator.share({
+            title:"CivilCalcAI Result",
+            text:text
+        }).catch(()=>{});
+
+    }else if(navigator.clipboard){
+
+        navigator.clipboard.writeText(text)
+        .then(()=>{
+            alert("✅ Result copied!");
+        })
+        .catch(()=>{
+            alert(text);
+        });
+
+    }else{
+
+        alert(text);
+    }
+}
+
+
+/* -----------------------------
+   PRINT
+----------------------------- */
+
+function printResult(id){
+
+    const result = document.getElementById(id);
+
+    if(!result) return;
+
+    const win = window.open("", "_blank");
+
+    if(!win){
+        alert("Please allow pop-ups to print.");
+        return;
+    }
+
+    win.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>CivilCalcAI Result</title>
+            <style>
+                body{
+                    font-family:Arial,sans-serif;
+                    padding:30px;
+                }
+                .result{
+                    padding:20px;
+                    border:1px solid #ccc;
+                    border-radius:10px;
+                    font-size:18px;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>🏗️ CivilCalcAI</h2>
+            <div class="result">
+                ${result.innerHTML}
+            </div>
+            <script>
+                window.onload = function(){
+                    window.print();
+                };
+            <\/script>
+        </body>
+        </html>
+    `);
+
+    win.document.close();
+}
+
+
+/* -----------------------------
+   POPULAR CARD SCROLL
+----------------------------- */
+
+function scrollToCalc(id){
+
+    const element = document.getElementById(id);
+
+    if(element){
+        element.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+    }
+}
+
+
+/* -----------------------------
+   FAQ
+----------------------------- */
+
+function toggleFaq(element){
+
+    const item = element.parentElement;
+
+    if(item){
+        item.classList.toggle("open");
+    }
+}
+
+
+/* -----------------------------
+   START
+----------------------------- */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    updateAreaFields();
+    updateVolumeFields();
+
+});
+
+</script>
+
+</body>
+</html>
