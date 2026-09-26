@@ -45,6 +45,7 @@ header p{
 
 .card h2{
   color:#0d47a1;
+  margin-top:0;
 }
 
 label{
@@ -53,7 +54,7 @@ label{
   font-weight:bold;
 }
 
-input{
+input,select{
   width:100%;
   padding:12px;
   margin-top:6px;
@@ -75,12 +76,17 @@ button{
   cursor:pointer;
 }
 
+button:hover{
+  background:#083b87;
+}
+
 .result{
   margin-top:15px;
   padding:12px;
   background:#e8f1ff;
   border-radius:7px;
   font-weight:bold;
+  line-height:1.6;
 }
 </style>
 </head>
@@ -94,6 +100,7 @@ button{
 
 <div class="container">
 
+<!-- 1 CONCRETE -->
 <div class="card">
 <h2>🧱 Concrete Volume</h2>
 
@@ -112,6 +119,7 @@ button{
 </div>
 
 
+<!-- 2 BRICK -->
 <div class="card">
 <h2>🧱 Brick Calculator</h2>
 
@@ -127,6 +135,7 @@ button{
 </div>
 
 
+<!-- 3 STEEL -->
 <div class="card">
 <h2>🔩 Steel Weight Calculator</h2>
 
@@ -141,65 +150,268 @@ button{
 <div class="result" id="steelResult"></div>
 </div>
 
+
+<!-- 4 CEMENT & SAND -->
+<div class="card">
+<h2>🏗️ Cement & Sand Calculator</h2>
+
+<label>Concrete Volume (m³)</label>
+<input type="number" id="csVolume" placeholder="Example: 1">
+
+<label>Cement Ratio</label>
+<select id="cementRatio">
+<option value="4">1 : 2 : 4</option>
+<option value="5">1 : 2 : 5</option>
+<option value="6">1 : 2 : 6</option>
+</select>
+
+<button onclick="calculateCementSand()">Calculate Materials</button>
+
+<div class="result" id="cementSandResult"></div>
 </div>
+
+
+<!-- 5 AREA -->
+<div class="card">
+<h2>📐 Area Calculator</h2>
+
+<label>Length (m)</label>
+<input type="number" id="areaLength" placeholder="Example: 10">
+
+<label>Width (m)</label>
+<input type="number" id="areaWidth" placeholder="Example: 5">
+
+<button onclick="calculateArea()">Calculate Area</button>
+
+<div class="result" id="areaResult"></div>
+</div>
+
+
+<!-- 6 UNIT CONVERTER -->
+<div class="card">
+<h2>📏 Unit Converter</h2>
+
+<label>Value</label>
+<input type="number" id="convertValue" placeholder="Example: 10">
+
+<label>From</label>
+<select id="fromUnit">
+<option value="m">Meter</option>
+<option value="ft">Feet</option>
+<option value="cm">Centimeter</option>
+<option value="mm">Millimeter</option>
+</select>
+
+<label>To</label>
+<select id="toUnit">
+<option value="m">Meter</option>
+<option value="ft">Feet</option>
+<option value="cm">Centimeter</option>
+<option value="mm">Millimeter</option>
+</select>
+
+<button onclick="convertUnit()">Convert</button>
+
+<div class="result" id="converterResult"></div>
+</div>
+
+
+<!-- 7 RCC BEAM -->
+<div class="card">
+<h2>🏢 RCC Beam Volume</h2>
+
+<label>Beam Length (m)</label>
+<input type="number" id="beamLength" placeholder="Example: 5">
+
+<label>Beam Width (m)</label>
+<input type="number" id="beamWidth" placeholder="Example: 0.23">
+
+<label>Beam Depth (m)</label>
+<input type="number" id="beamDepth" placeholder="Example: 0.30">
+
+<button onclick="calculateBeam()">Calculate Beam Volume</button>
+
+<div class="result" id="beamResult"></div>
+</div>
+
+</div>
+
 
 <script>
 
+/* 1 CONCRETE */
+
 function calculateConcrete(){
 
-const length = parseFloat(document.getElementById("length").value);
-const width = parseFloat(document.getElementById("width").value);
-const depth = parseFloat(document.getElementById("depth").value);
+const length=parseFloat(document.getElementById("length").value);
+const width=parseFloat(document.getElementById("width").value);
+const depth=parseFloat(document.getElementById("depth").value);
 
-if(isNaN(length) || isNaN(width) || isNaN(depth)){
-document.getElementById("concreteResult").innerHTML =
-"⚠️ Please enter all values.";
+if(!valid(length,width,depth)){
+document.getElementById("concreteResult").innerHTML=
+"⚠️ Please enter valid values.";
 return;
 }
 
-const volume = length * width * depth;
+const volume=length*width*depth;
 
-document.getElementById("concreteResult").innerHTML =
-"Concrete Volume = " + volume.toFixed(3) + " m³";
+document.getElementById("concreteResult").innerHTML=
+"Concrete Volume = "+volume.toFixed(3)+" m³";
 }
 
+
+/* 2 BRICKS */
 
 function calculateBricks(){
 
-const length = parseFloat(document.getElementById("wallLength").value);
-const height = parseFloat(document.getElementById("wallHeight").value);
+const length=parseFloat(document.getElementById("wallLength").value);
+const height=parseFloat(document.getElementById("wallHeight").value);
 
-if(isNaN(length) || isNaN(height)){
-document.getElementById("brickResult").innerHTML =
-"⚠️ Please enter all values.";
+if(!valid(length,height)){
+document.getElementById("brickResult").innerHTML=
+"⚠️ Please enter valid values.";
 return;
 }
 
-const wallArea = length * height;
-const bricks = wallArea * 60;
+const wallArea=length*height;
+const bricks=wallArea*60;
 
-document.getElementById("brickResult").innerHTML =
-"Approx. Bricks Required = " + Math.ceil(bricks);
+document.getElementById("brickResult").innerHTML=
+"Wall Area = "+wallArea.toFixed(2)+" m²<br>"+
+"Approx. Bricks Required = "+Math.ceil(bricks);
 }
 
+
+/* 3 STEEL */
 
 function calculateSteel(){
 
-const diameter = parseFloat(document.getElementById("diameter").value);
-const length = parseFloat(document.getElementById("steelLength").value);
+const diameter=parseFloat(document.getElementById("diameter").value);
+const length=parseFloat(document.getElementById("steelLength").value);
 
-if(isNaN(diameter) || isNaN(length)){
-document.getElementById("steelResult").innerHTML =
-"⚠️ Please enter all values.";
+if(!valid(diameter,length)){
+document.getElementById("steelResult").innerHTML=
+"⚠️ Please enter valid values.";
 return;
 }
 
-const weightPerMeter = (diameter * diameter) / 162;
-const totalWeight = weightPerMeter * length;
+const weightPerMeter=(diameter*diameter)/162;
+const totalWeight=weightPerMeter*length;
 
-document.getElementById("steelResult").innerHTML =
-"Weight per metre = " + weightPerMeter.toFixed(2) + " kg/m<br>" +
-"Total Steel Weight = " + totalWeight.toFixed(2) + " kg";
+document.getElementById("steelResult").innerHTML=
+"Weight per metre = "+weightPerMeter.toFixed(2)+" kg/m<br>"+
+"Total Steel Weight = "+totalWeight.toFixed(2)+" kg";
+}
+
+
+/* 4 CEMENT & SAND */
+
+function calculateCementSand(){
+
+const volume=parseFloat(document.getElementById("csVolume").value);
+const ratio=parseFloat(document.getElementById("cementRatio").value);
+
+if(!valid(volume)){
+document.getElementById("cementSandResult").innerHTML=
+"⚠️ Please enter a valid volume.";
+return;
+}
+
+/* Dry volume factor */
+const dryVolume=volume*1.54;
+
+const totalParts=1+2+ratio;
+
+const cementVolume=dryVolume*(1/totalParts);
+const sandVolume=dryVolume*(2/totalParts);
+const aggregateVolume=dryVolume*(ratio/totalParts);
+
+const cementBags=cementVolume/0.0347;
+
+document.getElementById("cementSandResult").innerHTML=
+"Dry Volume = "+dryVolume.toFixed(3)+" m³<br>"+
+"Cement = "+cementVolume.toFixed(3)+" m³<br>"+
+"Approx. Cement = "+cementBags.toFixed(1)+" bags<br>"+
+"Sand = "+sandVolume.toFixed(3)+" m³<br>"+
+"Aggregate = "+aggregateVolume.toFixed(3)+" m³";
+}
+
+
+/* 5 AREA */
+
+function calculateArea(){
+
+const length=parseFloat(document.getElementById("areaLength").value);
+const width=parseFloat(document.getElementById("areaWidth").value);
+
+if(!valid(length,width)){
+document.getElementById("areaResult").innerHTML=
+"⚠️ Please enter valid values.";
+return;
+}
+
+const area=length*width;
+
+document.getElementById("areaResult").innerHTML=
+"Area = "+area.toFixed(2)+" m²<br>"+
+"Area = "+(area*10.7639).toFixed(2)+" ft²";
+}
+
+
+/* 6 UNIT CONVERTER */
+
+function convertUnit(){
+
+const value=parseFloat(document.getElementById("convertValue").value);
+const from=document.getElementById("fromUnit").value;
+const to=document.getElementById("toUnit").value;
+
+if(!valid(value)){
+document.getElementById("converterResult").innerHTML=
+"⚠️ Please enter a valid value.";
+return;
+}
+
+const factors={
+m:1,
+ft:0.3048,
+cm:0.01,
+mm:0.001
+};
+
+const meters=value*factors[from];
+const result=meters/factors[to];
+
+document.getElementById("converterResult").innerHTML=
+"Result = "+result.toFixed(4)+" "+to;
+}
+
+
+/* 7 RCC BEAM */
+
+function calculateBeam(){
+
+const length=parseFloat(document.getElementById("beamLength").value);
+const width=parseFloat(document.getElementById("beamWidth").value);
+const depth=parseFloat(document.getElementById("beamDepth").value);
+
+if(!valid(length,width,depth)){
+document.getElementById("beamResult").innerHTML=
+"⚠️ Please enter valid values.";
+return;
+}
+
+const volume=length*width*depth;
+
+document.getElementById("beamResult").innerHTML=
+"RCC Beam Volume = "+volume.toFixed(3)+" m³";
+}
+
+
+/* VALIDATION */
+
+function valid(...values){
+return values.every(v=>Number.isFinite(v) && v>0);
 }
 
 </script>
