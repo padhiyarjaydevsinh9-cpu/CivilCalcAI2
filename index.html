@@ -3,216 +3,348 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CivilCalcAI</title>
+
+<title>CivilCalcAI - Civil Engineering Calculator</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f2f5f9;
-  color:#222;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f2f5f9;
+color:#222;
 }
 
 header{
-  background:#0d47a1;
-  color:white;
-  padding:25px 15px;
-  text-align:center;
+background:linear-gradient(135deg,#0d47a1,#1976d2);
+color:white;
+padding:35px 15px;
+text-align:center;
 }
 
 header h1{
-  margin:0;
-  font-size:30px;
+margin:0;
+font-size:32px;
 }
 
 header p{
-  margin:8px 0 0;
+margin:10px 0 0;
+font-size:16px;
 }
 
 .container{
-  max-width:700px;
-  margin:20px auto;
-  padding:15px;
+max-width:700px;
+margin:auto;
+padding:15px;
+}
+
+.welcome{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 3px 12px rgba(0,0,0,.1);
+}
+
+.welcome h2{
+margin-top:0;
+color:#0d47a1;
 }
 
 .card{
-  background:white;
-  padding:20px;
-  margin-bottom:20px;
-  border-radius:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,.1);
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.1);
 }
 
 .card h2{
-  color:#0d47a1;
+margin-top:0;
+color:#0d47a1;
 }
 
 label{
-  display:block;
-  margin-top:12px;
-  font-weight:bold;
+display:block;
+margin-top:12px;
+font-weight:bold;
 }
 
 input{
-  width:100%;
-  padding:12px;
-  margin-top:6px;
-  box-sizing:border-box;
-  border:1px solid #ccc;
-  border-radius:7px;
-  font-size:16px;
+width:100%;
+padding:13px;
+margin-top:6px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
 }
 
 button{
-  width:100%;
-  margin-top:15px;
-  padding:13px;
-  border:0;
-  border-radius:7px;
-  background:#0d47a1;
-  color:white;
-  font-size:17px;
-  cursor:pointer;
+width:100%;
+margin-top:15px;
+padding:13px;
+border:0;
+border-radius:8px;
+background:#0d47a1;
+color:white;
+font-size:17px;
+cursor:pointer;
 }
 
 button:hover{
-  background:#1565c0;
+background:#1565c0;
+}
+
+.reset{
+background:#757575;
+}
+
+.reset:hover{
+background:#555;
 }
 
 .result{
-  margin-top:15px;
-  padding:12px;
-  background:#e8f1ff;
-  border-radius:7px;
-  font-weight:bold;
+margin-top:15px;
+padding:14px;
+background:#e8f1ff;
+border-radius:8px;
+font-weight:bold;
+line-height:1.7;
 }
+
+footer{
+text-align:center;
+padding:25px 15px;
+color:#666;
+font-size:14px;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <h1>🏗️ CivilCalcAI</h1>
-<p>AI-powered Civil Engineering Calculator</p>
+
+<p>Smart Civil Engineering Calculator</p>
+
 </header>
+
 
 <div class="container">
 
+
+<!-- Welcome -->
+
+<div class="welcome">
+
+<h2>Welcome to CivilCalcAI 👷</h2>
+
+<p>
+Calculate concrete, bricks, steel, materials and construction cost easily.
+</p>
+
+</div>
+
+
 <!-- Concrete Calculator -->
+
 <div class="card">
+
 <h2>🧱 Concrete Volume</h2>
 
 <label>Length (m)</label>
+
 <input type="number" id="length" placeholder="Example: 5">
 
 <label>Width (m)</label>
+
 <input type="number" id="width" placeholder="Example: 3">
 
 <label>Depth (m)</label>
+
 <input type="number" id="depth" placeholder="Example: 0.15">
 
-<button onclick="calculateConcrete()">Calculate Volume</button>
+<button onclick="calculateConcrete()">
+Calculate Volume
+</button>
+
+<button class="reset" onclick="resetConcrete()">
+Reset
+</button>
 
 <div class="result" id="concreteResult"></div>
+
 </div>
 
 
 <!-- Brick Calculator -->
+
 <div class="card">
+
 <h2>🧱 Brick Calculator</h2>
 
 <label>Wall Length (m)</label>
+
 <input type="number" id="wallLength" placeholder="Example: 5">
 
 <label>Wall Height (m)</label>
+
 <input type="number" id="wallHeight" placeholder="Example: 3">
 
-<button onclick="calculateBricks()">Calculate Bricks</button>
+<button onclick="calculateBricks()">
+Calculate Bricks
+</button>
+
+<button class="reset" onclick="resetBricks()">
+Reset
+</button>
 
 <div class="result" id="brickResult"></div>
+
 </div>
 
 
 <!-- Steel Calculator -->
+
 <div class="card">
+
 <h2>🔩 Steel Weight Calculator</h2>
 
 <label>Steel Diameter (mm)</label>
+
 <input type="number" id="diameter" placeholder="Example: 12">
 
 <label>Steel Length (m)</label>
+
 <input type="number" id="steelLength" placeholder="Example: 10">
 
-<button onclick="calculateSteel()">Calculate Steel Weight</button>
+<button onclick="calculateSteel()">
+Calculate Steel Weight
+</button>
+
+<button class="reset" onclick="resetSteel()">
+Reset
+</button>
 
 <div class="result" id="steelResult"></div>
+
 </div>
 
 
 <!-- Cement & Sand Calculator -->
+
 <div class="card">
+
 <h2>🏗️ Cement & Sand Calculator</h2>
 
 <label>Concrete Volume (m³)</label>
+
 <input type="number" id="mixVolume" placeholder="Example: 1">
 
 <label>Cement Ratio</label>
+
 <input type="number" id="cementRatio" placeholder="Example: 1">
 
 <label>Sand Ratio</label>
+
 <input type="number" id="sandRatio" placeholder="Example: 2">
 
 <label>Aggregate Ratio</label>
+
 <input type="number" id="aggregateRatio" placeholder="Example: 4">
 
-<button onclick="calculateMaterials()">Calculate Materials</button>
+<button onclick="calculateMaterials()">
+Calculate Materials
+</button>
+
+<button class="reset" onclick="resetMaterials()">
+Reset
+</button>
 
 <div class="result" id="materialResult"></div>
+
 </div>
 
 
 <!-- Cost Calculator -->
+
 <div class="card">
+
 <h2>💰 Construction Cost Calculator</h2>
 
 <label>Cement Quantity (bags)</label>
+
 <input type="number" id="costCementQty" placeholder="Example: 6.34">
 
 <label>Cement Rate (₹ per bag)</label>
+
 <input type="number" id="cementRate" placeholder="Example: 400">
 
 <label>Sand Quantity (m³)</label>
+
 <input type="number" id="costSandQty" placeholder="Example: 0.44">
 
 <label>Sand Rate (₹ per m³)</label>
+
 <input type="number" id="sandRate" placeholder="Example: 1500">
 
 <label>Aggregate Quantity (m³)</label>
+
 <input type="number" id="costAggregateQty" placeholder="Example: 0.88">
 
 <label>Aggregate Rate (₹ per m³)</label>
+
 <input type="number" id="aggregateRate" placeholder="Example: 1400">
 
-<button onclick="calculateCost()">Calculate Total Cost</button>
+<button onclick="calculateCost()">
+Calculate Total Cost
+</button>
+
+<button class="reset" onclick="resetCost()">
+Reset
+</button>
 
 <div class="result" id="costResult"></div>
-</div>
 
 </div>
+
+
+</div>
+
+
+<footer>
+
+© 2026 CivilCalcAI | Civil Engineering Calculator
+
+</footer>
 
 
 <script>
 
+
 // Concrete Calculator
+
 function calculateConcrete(){
 
 let length=parseFloat(document.getElementById("length").value);
+
 let width=parseFloat(document.getElementById("width").value);
+
 let depth=parseFloat(document.getElementById("depth").value);
 
 if(isNaN(length)||isNaN(width)||isNaN(depth)){
+
 document.getElementById("concreteResult").innerHTML=
 "⚠️ Please enter all values.";
+
 return;
 }
 
@@ -220,76 +352,134 @@ let volume=length*width*depth;
 
 document.getElementById("concreteResult").innerHTML=
 "Concrete Volume = "+volume.toFixed(3)+" m³";
+
+}
+
+
+function resetConcrete(){
+
+document.getElementById("length").value="";
+
+document.getElementById("width").value="";
+
+document.getElementById("depth").value="";
+
+document.getElementById("concreteResult").innerHTML="";
+
 }
 
 
 // Brick Calculator
+
 function calculateBricks(){
 
 let length=parseFloat(document.getElementById("wallLength").value);
+
 let height=parseFloat(document.getElementById("wallHeight").value);
 
 if(isNaN(length)||isNaN(height)){
+
 document.getElementById("brickResult").innerHTML=
 "⚠️ Please enter all values.";
+
 return;
 }
 
 let wallArea=length*height;
+
 let bricks=wallArea*60;
 
 document.getElementById("brickResult").innerHTML=
 "Approx. Bricks Required = "+Math.ceil(bricks);
+
+}
+
+
+function resetBricks(){
+
+document.getElementById("wallLength").value="";
+
+document.getElementById("wallHeight").value="";
+
+document.getElementById("brickResult").innerHTML="";
+
 }
 
 
 // Steel Calculator
+
 function calculateSteel(){
 
 let diameter=parseFloat(document.getElementById("diameter").value);
+
 let length=parseFloat(document.getElementById("steelLength").value);
 
 if(isNaN(diameter)||isNaN(length)){
+
 document.getElementById("steelResult").innerHTML=
 "⚠️ Please enter all values.";
+
 return;
 }
 
 let weightPerMeter=(diameter*diameter)/162;
+
 let totalWeight=weightPerMeter*length;
 
 document.getElementById("steelResult").innerHTML=
 "Weight per metre = "+weightPerMeter.toFixed(2)+" kg/m<br>"+
 "Total Steel Weight = "+totalWeight.toFixed(2)+" kg";
+
+}
+
+
+function resetSteel(){
+
+document.getElementById("diameter").value="";
+
+document.getElementById("steelLength").value="";
+
+document.getElementById("steelResult").innerHTML="";
+
 }
 
 
 // Cement & Sand Calculator
+
 function calculateMaterials(){
 
 let volume=parseFloat(document.getElementById("mixVolume").value);
+
 let cement=parseFloat(document.getElementById("cementRatio").value);
+
 let sand=parseFloat(document.getElementById("sandRatio").value);
+
 let aggregate=parseFloat(document.getElementById("aggregateRatio").value);
 
 if(isNaN(volume)||isNaN(cement)||isNaN(sand)||isNaN(aggregate)){
+
 document.getElementById("materialResult").innerHTML=
 "⚠️ Please enter all values.";
+
 return;
 }
 
 let totalRatio=cement+sand+aggregate;
 
 if(totalRatio<=0){
+
 document.getElementById("materialResult").innerHTML=
 "⚠️ Ratio must be greater than 0.";
+
 return;
 }
 
 let dryVolume=volume*1.54;
 
 let cementVolume=dryVolume*(cement/totalRatio);
+
 let sandVolume=dryVolume*(sand/totalRatio);
+
 let aggregateVolume=dryVolume*(aggregate/totalRatio);
 
 let cementBags=cementVolume*1440/50;
@@ -298,19 +488,39 @@ document.getElementById("materialResult").innerHTML=
 "Cement = "+cementBags.toFixed(2)+" bags<br>"+
 "Sand = "+sandVolume.toFixed(3)+" m³<br>"+
 "Aggregate = "+aggregateVolume.toFixed(3)+" m³";
+
 }
 
 
-// Construction Cost Calculator
+function resetMaterials(){
+
+document.getElementById("mixVolume").value="";
+
+document.getElementById("cementRatio").value="";
+
+document.getElementById("sandRatio").value="";
+
+document.getElementById("aggregateRatio").value="";
+
+document.getElementById("materialResult").innerHTML="";
+
+}
+
+
+// Cost Calculator
+
 function calculateCost(){
 
 let cementQty=parseFloat(document.getElementById("costCementQty").value);
+
 let cementRate=parseFloat(document.getElementById("cementRate").value);
 
 let sandQty=parseFloat(document.getElementById("costSandQty").value);
+
 let sandRate=parseFloat(document.getElementById("sandRate").value);
 
 let aggregateQty=parseFloat(document.getElementById("costAggregateQty").value);
+
 let aggregateRate=parseFloat(document.getElementById("aggregateRate").value);
 
 if(
@@ -321,13 +531,18 @@ isNaN(sandRate) ||
 isNaN(aggregateQty) ||
 isNaN(aggregateRate)
 ){
+
 document.getElementById("costResult").innerHTML=
 "⚠️ Please enter all values.";
+
 return;
+
 }
 
 let cementCost=cementQty*cementRate;
+
 let sandCost=sandQty*sandRate;
+
 let aggregateCost=aggregateQty*aggregateRate;
 
 let totalCost=cementCost+sandCost+aggregateCost;
@@ -337,6 +552,26 @@ document.getElementById("costResult").innerHTML=
 "Sand Cost = ₹"+sandCost.toFixed(2)+"<br>"+
 "Aggregate Cost = ₹"+aggregateCost.toFixed(2)+"<br><br>"+
 "💰 Total Estimated Cost = ₹"+totalCost.toFixed(2);
+
+}
+
+
+function resetCost(){
+
+document.getElementById("costCementQty").value="";
+
+document.getElementById("cementRate").value="";
+
+document.getElementById("costSandQty").value="";
+
+document.getElementById("sandRate").value="";
+
+document.getElementById("costAggregateQty").value="";
+
+document.getElementById("aggregateRate").value="";
+
+document.getElementById("costResult").innerHTML="";
+
 }
 
 </script>
