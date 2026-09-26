@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CivilCalcAI</title>
 
 <style>
@@ -12,64 +13,81 @@ body{
   background:#f2f5f9;
   color:#222;
 }
+
 header{
   background:#0d47a1;
   color:white;
+  padding:25px 15px;
   text-align:center;
-  padding:30px 15px;
 }
-header h1{margin:0;font-size:32px;}
-header p{margin:8px 0 0;}
+
+header h1{
+  margin:0;
+  font-size:30px;
+}
+
+header p{
+  margin:8px 0 0;
+  font-size:15px;
+}
 
 .container{
-  max-width:600px;
-  margin:25px auto;
+  max-width:700px;
+  margin:20px auto;
   padding:15px;
 }
+
 .card{
   background:white;
-  padding:22px;
+  padding:20px;
   margin-bottom:20px;
-  border-radius:15px;
-  box-shadow:0 4px 15px rgba(0,0,0,.1);
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
-h2{color:#0d47a1;}
+
+.card h2{
+  margin-top:0;
+  color:#0d47a1;
+}
+
 label{
   display:block;
   margin-top:12px;
   font-weight:bold;
 }
+
 input{
   width:100%;
   padding:12px;
   margin-top:6px;
+  box-sizing:border-box;
   border:1px solid #ccc;
-  border-radius:8px;
+  border-radius:7px;
   font-size:16px;
 }
+
 button{
   width:100%;
-  padding:14px;
-  margin-top:18px;
+  margin-top:15px;
+  padding:13px;
+  border:none;
+  border-radius:7px;
   background:#0d47a1;
   color:white;
-  border:0;
-  border-radius:8px;
   font-size:17px;
-  font-weight:bold;
+  cursor:pointer;
 }
+
+button:hover{
+  background:#083b8c;
+}
+
 .result{
-  display:none;
   margin-top:15px;
-  padding:14px;
-  background:#e3f2fd;
-  border-radius:8px;
+  padding:12px;
+  background:#e8f1ff;
+  border-radius:7px;
   font-weight:bold;
-}
-footer{
-  text-align:center;
-  padding:20px;
-  color:#666;
 }
 </style>
 </head>
@@ -77,82 +95,89 @@ footer{
 <body>
 
 <header>
-<h1>🏗️ CivilCalcAI</h1>
-<p>AI-powered Civil Engineering Calculator</p>
+  <h1>🏗️ CivilCalcAI</h1>
+  <p>AI-powered Civil Engineering Calculator</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-<h2>📐 Concrete Volume</h2>
+  <!-- Concrete Calculator -->
+  <div class="card">
+    <h2>🧱 Concrete Volume</h2>
 
-<label>Length (m)</label>
-<input id="length" type="number" placeholder="Example: 5">
+    <label>Length (m)</label>
+    <input type="number" id="length" placeholder="Example: 5">
 
-<label>Width (m)</label>
-<input id="width" type="number" placeholder="Example: 3">
+    <label>Width (m)</label>
+    <input type="number" id="width" placeholder="Example: 3">
 
-<label>Depth (m)</label>
-<input id="depth" type="number" placeholder="Example: 0.15">
+    <label>Depth (m)</label>
+    <input type="number" id="depth" placeholder="Example: 0.15">
 
-<button onclick="volume()">Calculate Volume</button>
+    <button onclick="calculateConcrete()">Calculate Volume</button>
 
-<div id="volumeResult" class="result"></div>
+    <div class="result" id="concreteResult"></div>
+  </div>
+
+  <!-- Brick Calculator -->
+  <div class="card">
+    <h2>🧱 Brick Calculator</h2>
+
+    <label>Wall Length (m)</label>
+    <input type="number" id="wallLength" placeholder="Example: 5">
+
+    <label>Wall Height (m)</label>
+    <input type="number" id="wallHeight" placeholder="Example: 3">
+
+    <button onclick="calculateBricks()">Calculate Bricks</button>
+
+    <div class="result" id="brickResult"></div>
+  </div>
+
 </div>
-
-<div class="card">
-<h2>🧱 Brick Calculator</h2>
-
-<label>Wall Length (m)</label>
-<input id="wallLength" type="number" placeholder="Example: 5">
-
-<label>Wall Height (m)</label>
-<input id="wallHeight" type="number" placeholder="Example: 3">
-
-<button onclick="bricks()">Calculate Bricks</button>
-
-<div id="brickResult" class="result"></div>
-</div>
-
-</div>
-
-<footer>
-© 2026 CivilCalcAI
-</footer>
 
 <script>
-function volume(){
-  let l=Number(document.getElementById("length").value);
-  let w=Number(document.getElementById("width").value);
-  let d=Number(document.getElementById("depth").value);
-  let r=document.getElementById("volumeResult");
 
-  r.style.display="block";
+function calculateConcrete(){
 
-  if(l<=0 || w<=0 || d<=0){
-    r.innerHTML="⚠️ Please enter valid values.";
+  let length = parseFloat(document.getElementById("length").value);
+  let width = parseFloat(document.getElementById("width").value);
+  let depth = parseFloat(document.getElementById("depth").value);
+
+  if(isNaN(length) || isNaN(width) || isNaN(depth)){
+    document.getElementById("concreteResult").innerHTML =
+    "⚠️ Please enter all values.";
     return;
   }
 
-  let v=l*w*d;
-  r.innerHTML="✅ Concrete Volume = "+v.toFixed(3)+" m³";
+  let volume = length * width * depth;
+
+  document.getElementById("concreteResult").innerHTML =
+  "Concrete Volume = " + volume.toFixed(3) + " m³";
 }
 
-function bricks(){
-  let l=Number(document.getElementById("wallLength").value);
-  let h=Number(document.getElementById("wallHeight").value);
-  let r=document.getElementById("brickResult");
 
-  r.style.display="block";
+function calculateBricks(){
 
-  if(l<=0 || h<=0){
-    r.innerHTML="⚠️ Please enter valid values.";
+  let length = parseFloat(document.getElementById("wallLength").value);
+  let height = parseFloat(document.getElementById("wallHeight").value);
+
+  if(isNaN(length) || isNaN(height)){
+    document.getElementById("brickResult").innerHTML =
+    "⚠️ Please enter all values.";
     return;
   }
 
-  let b=l*h*50;
-  r.innerHTML="✅ Approx. Bricks Required = "+Math.ceil(b);
+  let wallArea = length * height;
+
+  // Approximate bricks per square metre
+  let bricks = wallArea * 60;
+
+  document.getElementById("brickResult").innerHTML =
+  "Approx. Bricks Required = " + Math.ceil(bricks);
+
 }
+
 </script>
 
 </body>
