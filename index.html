@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CivilCalcAI</title>
 
 <style>
@@ -28,7 +27,6 @@ header h1{
 
 header p{
   margin:8px 0 0;
-  font-size:15px;
 }
 
 .container{
@@ -42,11 +40,10 @@ header p{
   padding:20px;
   margin-bottom:20px;
   border-radius:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
 .card h2{
-  margin-top:0;
   color:#0d47a1;
 }
 
@@ -70,16 +67,11 @@ button{
   width:100%;
   margin-top:15px;
   padding:13px;
-  border:none;
+  border:0;
   border-radius:7px;
   background:#0d47a1;
   color:white;
   font-size:17px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#083b8c;
 }
 
 .result{
@@ -95,13 +87,12 @@ button:hover{
 <body>
 
 <header>
-  <h1>🏗️ CivilCalcAI</h1>
-  <p>AI-powered Civil Engineering Calculator</p>
+<h1>🏗️ CivilCalcAI</h1>
+<p>AI-powered Civil Engineering Calculator</p>
 </header>
 
 <div class="container">
 
-<!-- CONCRETE -->
 <div class="card">
 <h2>🧱 Concrete Volume</h2>
 
@@ -120,7 +111,6 @@ button:hover{
 </div>
 
 
-<!-- BRICK -->
 <div class="card">
 <h2>🧱 Brick Calculator</h2>
 
@@ -136,7 +126,6 @@ button:hover{
 </div>
 
 
-<!-- STEEL -->
 <div class="card">
 <h2>🔩 Steel Weight Calculator</h2>
 
@@ -153,7 +142,6 @@ button:hover{
 
 </div>
 
-
 <script>
 
 function calculateConcrete(){
@@ -163,8 +151,7 @@ let width=parseFloat(document.getElementById("width").value);
 let depth=parseFloat(document.getElementById("depth").value);
 
 if(isNaN(length)||isNaN(width)||isNaN(depth)){
-document.getElementById("concreteResult").innerHTML=
-"⚠️ Please enter all values.";
+document.getElementById("concreteResult").innerHTML="⚠️ Please enter all values.";
 return;
 }
 
@@ -181,8 +168,7 @@ let length=parseFloat(document.getElementById("wallLength").value);
 let height=parseFloat(document.getElementById("wallHeight").value);
 
 if(isNaN(length)||isNaN(height)){
-document.getElementById("brickResult").innerHTML=
-"⚠️ Please enter all values.";
+document.getElementById("brickResult").innerHTML="⚠️ Please enter all values.";
 return;
 }
 
@@ -200,8 +186,7 @@ let diameter=parseFloat(document.getElementById("diameter").value);
 let length=parseFloat(document.getElementById("steelLength").value);
 
 if(isNaN(diameter)||isNaN(length)){
-document.getElementById("steelResult").innerHTML=
-"⚠️ Please enter all values.";
+document.getElementById("steelResult").innerHTML="⚠️ Please enter all values.";
 return;
 }
 
@@ -210,10 +195,4 @@ let totalWeight=weightPerMeter*length;
 
 document.getElementById("steelResult").innerHTML=
 "Weight per metre = "+weightPerMeter.toFixed(2)+" kg/m<br>"+
-"Total Steel Weight = "+totalWeight.toFixed(2)+" kg";
-}
-
-</script>
-
-</body>
-</html>
+"Total Steel Weight = "+totalWeight.toFixed(2)+" kg
