@@ -1,2 +1,2 @@
-# CivilCalcAI2
+# CivilCalcAI
 AI-powered Civil Engineering Calculator
