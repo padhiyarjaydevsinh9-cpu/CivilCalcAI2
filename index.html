@@ -101,81 +101,116 @@ button:hover{
 
 <div class="container">
 
-  <!-- Concrete Calculator -->
-  <div class="card">
-    <h2>🧱 Concrete Volume</h2>
+<!-- CONCRETE -->
+<div class="card">
+<h2>🧱 Concrete Volume</h2>
 
-    <label>Length (m)</label>
-    <input type="number" id="length" placeholder="Example: 5">
+<label>Length (m)</label>
+<input type="number" id="length" placeholder="Example: 5">
 
-    <label>Width (m)</label>
-    <input type="number" id="width" placeholder="Example: 3">
+<label>Width (m)</label>
+<input type="number" id="width" placeholder="Example: 3">
 
-    <label>Depth (m)</label>
-    <input type="number" id="depth" placeholder="Example: 0.15">
+<label>Depth (m)</label>
+<input type="number" id="depth" placeholder="Example: 0.15">
 
-    <button onclick="calculateConcrete()">Calculate Volume</button>
+<button onclick="calculateConcrete()">Calculate Volume</button>
 
-    <div class="result" id="concreteResult"></div>
-  </div>
+<div class="result" id="concreteResult"></div>
+</div>
 
-  <!-- Brick Calculator -->
-  <div class="card">
-    <h2>🧱 Brick Calculator</h2>
 
-    <label>Wall Length (m)</label>
-    <input type="number" id="wallLength" placeholder="Example: 5">
+<!-- BRICK -->
+<div class="card">
+<h2>🧱 Brick Calculator</h2>
 
-    <label>Wall Height (m)</label>
-    <input type="number" id="wallHeight" placeholder="Example: 3">
+<label>Wall Length (m)</label>
+<input type="number" id="wallLength" placeholder="Example: 5">
 
-    <button onclick="calculateBricks()">Calculate Bricks</button>
+<label>Wall Height (m)</label>
+<input type="number" id="wallHeight" placeholder="Example: 3">
 
-    <div class="result" id="brickResult"></div>
-  </div>
+<button onclick="calculateBricks()">Calculate Bricks</button>
+
+<div class="result" id="brickResult"></div>
+</div>
+
+
+<!-- STEEL -->
+<div class="card">
+<h2>🔩 Steel Weight Calculator</h2>
+
+<label>Steel Diameter (mm)</label>
+<input type="number" id="diameter" placeholder="Example: 12">
+
+<label>Steel Length (m)</label>
+<input type="number" id="steelLength" placeholder="Example: 10">
+
+<button onclick="calculateSteel()">Calculate Steel Weight</button>
+
+<div class="result" id="steelResult"></div>
+</div>
 
 </div>
+
 
 <script>
 
 function calculateConcrete(){
 
-  let length = parseFloat(document.getElementById("length").value);
-  let width = parseFloat(document.getElementById("width").value);
-  let depth = parseFloat(document.getElementById("depth").value);
+let length=parseFloat(document.getElementById("length").value);
+let width=parseFloat(document.getElementById("width").value);
+let depth=parseFloat(document.getElementById("depth").value);
 
-  if(isNaN(length) || isNaN(width) || isNaN(depth)){
-    document.getElementById("concreteResult").innerHTML =
-    "⚠️ Please enter all values.";
-    return;
-  }
+if(isNaN(length)||isNaN(width)||isNaN(depth)){
+document.getElementById("concreteResult").innerHTML=
+"⚠️ Please enter all values.";
+return;
+}
 
-  let volume = length * width * depth;
+let volume=length*width*depth;
 
-  document.getElementById("concreteResult").innerHTML =
-  "Concrete Volume = " + volume.toFixed(3) + " m³";
+document.getElementById("concreteResult").innerHTML=
+"Concrete Volume = "+volume.toFixed(3)+" m³";
 }
 
 
 function calculateBricks(){
 
-  let length = parseFloat(document.getElementById("wallLength").value);
-  let height = parseFloat(document.getElementById("wallHeight").value);
+let length=parseFloat(document.getElementById("wallLength").value);
+let height=parseFloat(document.getElementById("wallHeight").value);
 
-  if(isNaN(length) || isNaN(height)){
-    document.getElementById("brickResult").innerHTML =
-    "⚠️ Please enter all values.";
-    return;
-  }
+if(isNaN(length)||isNaN(height)){
+document.getElementById("brickResult").innerHTML=
+"⚠️ Please enter all values.";
+return;
+}
 
-  let wallArea = length * height;
+let wallArea=length*height;
+let bricks=wallArea*60;
 
-  // Approximate bricks per square metre
-  let bricks = wallArea * 60;
+document.getElementById("brickResult").innerHTML=
+"Approx. Bricks Required = "+Math.ceil(bricks);
+}
 
-  document.getElementById("brickResult").innerHTML =
-  "Approx. Bricks Required = " + Math.ceil(bricks);
 
+function calculateSteel(){
+
+let diameter=parseFloat(document.getElementById("diameter").value);
+let length=parseFloat(document.getElementById("steelLength").value);
+
+if(isNaN(diameter)||isNaN(length)){
+document.getElementById("steelResult").innerHTML=
+"⚠️ Please enter all values.";
+return;
+}
+
+let weightPerMeter=(diameter*diameter)/162;
+let totalWeight=weightPerMeter*length;
+
+document.getElementById("steelResult").innerHTML=
+"Weight per metre = "+weightPerMeter.toFixed(2)+" kg/m<br>"+
+"Total Steel Weight = "+totalWeight.toFixed(2)+" kg";
 }
 
 </script>
