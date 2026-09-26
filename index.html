@@ -2,419 +2,1018 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<!-- Google Search Console Verification -->
+<meta name="google-site-verification" content="s7ZoG4qNkOB56BKa41x6cnvY9mZMfmp2IKbLq_usp9g">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CivilCalcAI</title>
+
+<title>CivilCalcAI | Civil Engineering Calculators</title>
+
+<meta name="description" content="Free online civil engineering calculators for concrete, bricks, steel, rebar, RCC beam, construction cost, area, volume and unit conversion.">
+
+<meta name="keywords" content="civil engineering calculator, concrete calculator, brick calculator, steel weight calculator, rebar calculator, RCC beam calculator, construction cost calculator">
+
+<meta name="author" content="CivilCalcAI">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://civilcalcai2.github.io/CivilCalcAI2/">
 
 <style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f2f5f9;
-  color:#222;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f8ff;
+    color:#172033;
+    line-height:1.6;
 }
 
 header{
-  background:#0d47a1;
-  color:white;
-  padding:25px 15px;
-  text-align:center;
+    background:linear-gradient(135deg,#0757c8,#18a0fb);
+    color:white;
+    padding:16px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
 }
 
-header h1{
-  margin:0;
-  font-size:30px;
+.nav{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-header p{
-  margin:8px 0 0;
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#0757c8,#19a5ff);
+    color:white;
+    text-align:center;
+    padding:60px 20px 55px;
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    max-width:760px;
+    margin:auto;
+    font-size:17px;
+}
+
+.hero-buttons{
+    margin-top:25px;
+}
+
+.btn{
+    display:inline-block;
+    background:white;
+    color:#0757c8;
+    padding:12px 20px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+    margin:5px;
+    border:none;
+    cursor:pointer;
 }
 
 .container{
-  max-width:700px;
-  margin:20px auto;
-  padding:15px;
+    width:92%;
+    max-width:1100px;
+    margin:35px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.section-title h2{
+    font-size:28px;
+    color:#0757c8;
+}
+
+.section-title p{
+    color:#687386;
+    margin-top:5px;
+}
+
+.popular-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.popular-card{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 5px 18px rgba(20,50,90,.08);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.popular-card:hover{
+    transform:translateY(-3px);
+}
+
+.popular-card .icon{
+    font-size:32px;
+}
+
+.popular-card h3{
+    font-size:16px;
+    margin-top:7px;
+}
+
+.calculators{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
 }
 
 .card{
-  background:white;
-  padding:20px;
-  margin-bottom:20px;
-  border-radius:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,.1);
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(20,50,90,.09);
 }
 
-.card h2{
-  color:#0d47a1;
-  margin-top:0;
+.card h3{
+    color:#0757c8;
+    margin-bottom:15px;
 }
 
-label{
-  display:block;
-  margin-top:12px;
-  font-weight:bold;
+.card label{
+    display:block;
+    font-weight:bold;
+    margin-top:10px;
+    font-size:14px;
 }
 
-input,select{
-  width:100%;
-  padding:12px;
-  margin-top:6px;
-  box-sizing:border-box;
-  border:1px solid #ccc;
-  border-radius:7px;
-  font-size:16px;
+.card input,
+.card select{
+    width:100%;
+    padding:11px;
+    margin-top:5px;
+    border:1px solid #ccd6e5;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
 }
 
-button{
-  width:100%;
-  margin-top:15px;
-  padding:13px;
-  border:0;
-  border-radius:7px;
-  background:#0d47a1;
-  color:white;
-  font-size:17px;
-  cursor:pointer;
+.card input:focus,
+.card select:focus{
+    border-color:#168ff0;
 }
 
-button:hover{
-  background:#083b87;
+.calc-btn{
+    width:100%;
+    margin-top:16px;
+    background:#0757c8;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:9px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.calc-btn:hover{
+    background:#06469f;
+}
+
+.reset-btn{
+    width:100%;
+    margin-top:8px;
+    background:#eef1f5;
+    color:#27364a;
+    border:none;
+    padding:10px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .result{
-  margin-top:15px;
-  padding:12px;
-  background:#e8f1ff;
-  border-radius:7px;
-  font-weight:bold;
-  line-height:1.6;
+    background:#eef7ff;
+    border-left:4px solid #087fe5;
+    padding:13px;
+    margin-top:15px;
+    border-radius:7px;
+    font-weight:bold;
+    word-break:break-word;
+}
+
+.result-actions{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.small-btn{
+    flex:1;
+    padding:9px;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
+    background:#e4edf8;
+    color:#123;
+    font-weight:bold;
+}
+
+.info-box{
+    background:#fff8df;
+    border-left:5px solid #f0b400;
+    padding:16px;
+    border-radius:9px;
+    margin:25px 0;
+}
+
+.seo-section{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    margin-top:25px;
+    box-shadow:0 5px 18px rgba(20,50,90,.07);
+}
+
+.seo-section h2{
+    color:#0757c8;
+    margin-bottom:12px;
+}
+
+.seo-section h3{
+    color:#183b68;
+    margin-top:18px;
+    margin-bottom:6px;
+}
+
+.seo-section p{
+    color:#4c596d;
+    margin-bottom:10px;
+}
+
+.seo-section ul{
+    padding-left:22px;
+    color:#4c596d;
+}
+
+.faq-item{
+    border-bottom:1px solid #dde5ef;
+    padding:15px 0;
+}
+
+.faq-question{
+    font-weight:bold;
+    color:#173f72;
+    cursor:pointer;
+}
+
+.faq-answer{
+    display:none;
+    margin-top:8px;
+    color:#596579;
+}
+
+.faq-item.open .faq-answer{
+    display:block;
+}
+
+.history-box{
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(20,50,90,.09);
+}
+
+.history-item{
+    padding:12px;
+    border-bottom:1px solid #e3e9f1;
+    font-size:14px;
+}
+
+.clear-btn{
+    background:#d93636;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:12px;
+}
+
+.about{
+    background:linear-gradient(135deg,#eaf5ff,#f8fbff);
+    padding:25px;
+    border-radius:16px;
+    margin-top:30px;
+}
+
+footer{
+    background:#10243d;
+    color:#dce7f4;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:40px;
+    font-size:14px;
+}
+
+footer p{
+    margin:5px;
+}
+
+@media(max-width:850px){
+    .popular-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .calculators{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+}
+
+@media(max-width:520px){
+    .nav{
+        flex-direction:column;
+    }
+
+    .nav-links{
+        justify-content:center;
+        gap:12px;
+    }
+
+    .hero{
+        padding:45px 15px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .popular-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .card{
+        padding:17px;
+    }
+
+    .result-actions{
+        flex-direction:column;
+    }
+}
+
+@media print{
+    header,
+    .hero,
+    .popular-section,
+    .calculators,
+    .seo-section,
+    .about,
+    footer,
+    .info-box{
+        display:none!important;
+    }
+
+    body{
+        background:white;
+    }
+
+    #history{
+        display:block!important;
+    }
 }
 </style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"WebSite",
+ "name":"CivilCalcAI",
+ "url":"https://civilcalcai2.github.io/CivilCalcAI2/",
+ "description":"Free civil engineering calculators for construction and engineering calculations."
+}
+</script>
 </head>
 
 <body>
 
 <header>
-<h1>🏗️ CivilCalcAI</h1>
-<p>AI-powered Civil Engineering Calculator</p>
+<div class="nav">
+<div class="logo">🏗️ CivilCalcAI</div>
+
+<div class="nav-links">
+<a href="#calculators">Calculators</a>
+<a href="#history">History</a>
+<a href="#faq">FAQ</a>
+<a href="#about">About</a>
+</div>
+</div>
 </header>
+
+<section class="hero">
+
+<h1>Free Civil Engineering Calculators</h1>
+
+<p>
+Calculate concrete volume, bricks, steel weight, rebar,
+RCC beam, construction cost, materials, area, volume and units.
+</p>
+
+<div class="hero-buttons">
+<a class="btn" href="#calculators">🚀 Start Calculating</a>
+<a class="btn" href="#faq">❓ Learn More</a>
+</div>
+
+</section>
+
+<section class="container popular-section">
+
+<div class="section-title">
+<h2>🔥 Popular Civil Calculators</h2>
+<p>Useful tools for students, engineers and construction work.</p>
+</div>
+
+<div class="popular-grid">
+
+<div class="popular-card" onclick="scrollToCalc('concrete')">
+<div class="icon">🧱</div>
+<h3>Concrete Volume</h3>
+</div>
+
+<div class="popular-card" onclick="scrollToCalc('steel')">
+<div class="icon">🔩</div>
+<h3>Steel Weight</h3>
+</div>
+
+<div class="popular-card" onclick="scrollToCalc('brick')">
+<div class="icon">🧱</div>
+<h3>Brick Calculator</h3>
+</div>
+
+<div class="popular-card" onclick="scrollToCalc('cost')">
+<div class="icon">💰</div>
+<h3>Construction Cost</h3>
+</div>
+
+</div>
+</section>
 
 <div class="container">
 
-<!-- 1 CONCRETE -->
-<div class="card">
-<h2>🧱 Concrete Volume</h2>
+<div class="info-box">
+<strong>⚠️ Important:</strong>
+These calculators provide estimates. For actual construction work,
+verify calculations with drawings, project specifications, applicable
+codes and a qualified engineer.
+</div>
+
+<div id="calculators" class="section-title">
+<h2>📐 Civil Engineering Calculators</h2>
+<p>Enter your values and get an instant result.</p>
+</div>
+
+<div class="calculators">
+
+<!-- CONCRETE -->
+
+<div class="card" id="concrete">
+
+<h3>🧱 Concrete Volume Calculator</h3>
 
 <label>Length (m)</label>
-<input type="number" id="length" placeholder="Example: 5">
+<input id="conLength" type="number" step="any" placeholder="Example: 5">
 
 <label>Width (m)</label>
-<input type="number" id="width" placeholder="Example: 3">
+<input id="conWidth" type="number" step="any" placeholder="Example: 3">
 
 <label>Depth (m)</label>
-<input type="number" id="depth" placeholder="Example: 0.15">
+<input id="conDepth" type="number" step="any" placeholder="Example: 0.15">
 
-<button onclick="calculateConcrete()">Calculate Volume</button>
+<button class="calc-btn" onclick="concreteCalc()">
+Calculate Concrete
+</button>
 
-<div class="result" id="concreteResult"></div>
+<button class="reset-btn" onclick="resetCard('concrete')">
+↻ Reset
+</button>
+
+<div class="result" id="conResult">
+Result will appear here.
 </div>
 
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('conResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('conResult')">🖨️ PDF</button>
+</div>
 
-<!-- 2 BRICK -->
-<div class="card">
-<h2>🧱 Brick Calculator</h2>
+</div>
+
+<!-- BRICK -->
+
+<div class="card" id="brick">
+
+<h3>🧱 Brick Calculator</h3>
 
 <label>Wall Length (m)</label>
-<input type="number" id="wallLength" placeholder="Example: 5">
+<input id="brickLength" type="number" step="any" placeholder="Example: 10">
 
 <label>Wall Height (m)</label>
-<input type="number" id="wallHeight" placeholder="Example: 3">
+<input id="brickHeight" type="number" step="any" placeholder="Example: 3">
 
-<button onclick="calculateBricks()">Calculate Bricks</button>
+<button class="calc-btn" onclick="brickCalc()">
+Calculate Bricks
+</button>
 
-<div class="result" id="brickResult"></div>
+<button class="reset-btn" onclick="resetCard('brick')">
+↻ Reset
+</button>
+
+<div class="result" id="brickResult">
+Result will appear here.
 </div>
 
-
-<!-- 3 STEEL -->
-<div class="card">
-<h2>🔩 Steel Weight Calculator</h2>
-
-<label>Steel Diameter (mm)</label>
-<input type="number" id="diameter" placeholder="Example: 12">
-
-<label>Steel Length (m)</label>
-<input type="number" id="steelLength" placeholder="Example: 10">
-
-<button onclick="calculateSteel()">Calculate Steel Weight</button>
-
-<div class="result" id="steelResult"></div>
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('brickResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('brickResult')">🖨️ PDF</button>
 </div>
 
-
-<!-- 4 CEMENT & SAND -->
-<div class="card">
-<h2>🏗️ Cement & Sand Calculator</h2>
-
-<label>Concrete Volume (m³)</label>
-<input type="number" id="csVolume" placeholder="Example: 1">
-
-<label>Cement Ratio</label>
-<select id="cementRatio">
-<option value="4">1 : 2 : 4</option>
-<option value="5">1 : 2 : 5</option>
-<option value="6">1 : 2 : 6</option>
-</select>
-
-<button onclick="calculateCementSand()">Calculate Materials</button>
-
-<div class="result" id="cementSandResult"></div>
 </div>
 
+<!-- STEEL -->
 
-<!-- 5 AREA -->
-<div class="card">
-<h2>📐 Area Calculator</h2>
+<div class="card" id="steel">
+
+<h3>🔩 Steel Weight Calculator</h3>
+
+<label>Diameter (mm)</label>
+<input id="steelDia" type="number" step="any" placeholder="Example: 12">
 
 <label>Length (m)</label>
-<input type="number" id="areaLength" placeholder="Example: 10">
+<input id="steelLength" type="number" step="any" placeholder="Example: 10">
 
-<label>Width (m)</label>
-<input type="number" id="areaWidth" placeholder="Example: 5">
+<button class="calc-btn" onclick="steelCalc()">
+Calculate Steel Weight
+</button>
 
-<button onclick="calculateArea()">Calculate Area</button>
+<button class="reset-btn" onclick="resetCard('steel')">
+↻ Reset
+</button>
 
-<div class="result" id="areaResult"></div>
+<div class="result" id="steelResult">
+Result will appear here.
 </div>
 
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('steelResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('steelResult')">🖨️ PDF</button>
+</div>
 
-<!-- 6 UNIT CONVERTER -->
-<div class="card">
-<h2>📏 Unit Converter</h2>
+</div>
+
+<!-- MATERIAL -->
+
+<div class="card" id="materials">
+
+<h3>🏗️ Cement, Sand & Aggregate</h3>
+
+<label>Concrete Volume (m³)</label>
+<input id="mixVol" type="number" step="any" placeholder="Example: 10">
+
+<label>Cement Ratio</label>
+<input id="cementRatio" type="number" step="any" value="1">
+
+<label>Sand Ratio</label>
+<input id="sandRatio" type="number" step="any" value="2">
+
+<label>Aggregate Ratio</label>
+<input id="aggRatio" type="number" step="any" value="4">
+
+<button class="calc-btn" onclick="mixCalc()">
+Calculate Materials
+</button>
+
+<button class="reset-btn" onclick="resetCard('materials')">
+↻ Reset
+</button>
+
+<div class="result" id="mixResult">
+Result will appear here.
+</div>
+
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('mixResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('mixResult')">🖨️ PDF</button>
+</div>
+
+</div>
+
+<!-- COST -->
+
+<div class="card" id="cost">
+
+<h3>💰 Construction Cost Calculator</h3>
+
+<label>Cement Quantity</label>
+<input id="cementQty" type="number" step="any" placeholder="Example: 50">
+
+<label>Cement Rate</label>
+<input id="cementRate" type="number" step="any" placeholder="₹ per unit">
+
+<label>Sand Quantity</label>
+<input id="sandQty" type="number" step="any" placeholder="Example: 5">
+
+<label>Sand Rate</label>
+<input id="sandRate" type="number" step="any" placeholder="₹ per unit">
+
+<label>Aggregate Quantity</label>
+<input id="aggQty" type="number" step="any" placeholder="Example: 8">
+
+<label>Aggregate Rate</label>
+<input id="aggRate" type="number" step="any" placeholder="₹ per unit">
+
+<button class="calc-btn" onclick="costCalc()">
+Calculate Cost
+</button>
+
+<button class="reset-btn" onclick="resetCard('cost')">
+↻ Reset
+</button>
+
+<div class="result" id="costResult">
+Result will appear here.
+</div>
+
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('costResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('costResult')">🖨️ PDF</button>
+</div>
+
+</div>
+
+<!-- AREA -->
+
+<div class="card" id="area">
+
+<h3>📐 Area Calculator</h3>
+
+<label>Shape</label>
+
+<select id="areaShape" onchange="updateAreaFields()">
+<option value="rectangle">Rectangle</option>
+<option value="triangle">Triangle</option>
+<option value="circle">Circle</option>
+</select>
+
+<div id="areaFields"></div>
+
+<button class="calc-btn" onclick="areaCalc()">
+Calculate Area
+</button>
+
+<button class="reset-btn" onclick="resetCard('area')">
+↻ Reset
+</button>
+
+<div class="result" id="areaResult">
+Result will appear here.
+</div>
+
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('areaResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('areaResult')">🖨️ PDF</button>
+</div>
+
+</div>
+
+<!-- VOLUME -->
+
+<div class="card" id="volume">
+
+<h3>📦 Volume Calculator</h3>
+
+<label>Shape</label>
+
+<select id="volumeShape" onchange="updateVolumeFields()">
+<option value="cuboid">Cuboid / Box</option>
+<option value="cylinder">Cylinder</option>
+</select>
+
+<div id="volumeFields"></div>
+
+<button class="calc-btn" onclick="volumeCalc()">
+Calculate Volume
+</button>
+
+<button class="reset-btn" onclick="resetCard('volume')">
+↻ Reset
+</button>
+
+<div class="result" id="volumeResult">
+Result will appear here.
+</div>
+
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('volumeResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('volumeResult')">🖨️ PDF</button>
+</div>
+
+</div>
+
+<!-- UNIT -->
+
+<div class="card" id="unit">
+
+<h3>📏 Unit Converter</h3>
 
 <label>Value</label>
-<input type="number" id="convertValue" placeholder="Example: 10">
+<input id="unitValue" type="number" step="any" placeholder="Example: 10">
 
 <label>From</label>
-<select id="fromUnit">
-<option value="m">Meter</option>
-<option value="ft">Feet</option>
+
+<select id="unitFrom">
+<option value="meter">Meter</option>
+<option value="feet">Feet</option>
+<option value="inch">Inch</option>
 <option value="cm">Centimeter</option>
-<option value="mm">Millimeter</option>
 </select>
 
 <label>To</label>
-<select id="toUnit">
-<option value="m">Meter</option>
-<option value="ft">Feet</option>
+
+<select id="unitTo">
+<option value="meter">Meter</option>
+<option value="feet">Feet</option>
+<option value="inch">Inch</option>
 <option value="cm">Centimeter</option>
-<option value="mm">Millimeter</option>
 </select>
 
-<button onclick="convertUnit()">Convert</button>
+<button class="calc-btn" onclick="unitCalc()">
+Convert
+</button>
 
-<div class="result" id="converterResult"></div>
+<button class="reset-btn" onclick="resetCard('unit')">
+↻ Reset
+</button>
+
+<div class="result" id="unitResult">
+Result will appear here.
 </div>
 
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('unitResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('unitResult')">🖨️ PDF</button>
+</div>
 
-<!-- 7 RCC BEAM -->
-<div class="card">
-<h2>🏢 RCC Beam Volume</h2>
+</div>
+
+<!-- REBAR -->
+
+<div class="card" id="rebar">
+
+<h3>🔩 Rebar Calculator</h3>
+
+<label>Bar Diameter (mm)</label>
+<input id="rebarDia" type="number" step="any" placeholder="Example: 12">
+
+<label>Length per Bar (m)</label>
+<input id="rebarLength" type="number" step="any" placeholder="Example: 10">
+
+<label>Number of Bars</label>
+<input id="rebarBars" type="number" step="any" placeholder="Example: 20">
+
+<button class="calc-btn" onclick="rebarCalc()">
+Calculate Rebar Weight
+</button>
+
+<button class="reset-btn" onclick="resetCard('rebar')">
+↻ Reset
+</button>
+
+<div class="result" id="rebarResult">
+Result will appear here.
+</div>
+
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('rebarResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('rebarResult')">🖨️ PDF</button>
+</div>
+
+</div>
+
+<!-- RCC BEAM -->
+
+<div class="card" id="rccbeam">
+
+<h3>🏗️ RCC Beam Calculator</h3>
+
+<label>Beam Width (mm)</label>
+<input id="beamWidth" type="number" step="any" placeholder="Example: 230">
+
+<label>Beam Depth (mm)</label>
+<input id="beamDepth" type="number" step="any" placeholder="Example: 450">
 
 <label>Beam Length (m)</label>
-<input type="number" id="beamLength" placeholder="Example: 5">
+<input id="beamLength" type="number" step="any" placeholder="Example: 5">
 
-<label>Beam Width (m)</label>
-<input type="number" id="beamWidth" placeholder="Example: 0.23">
+<button class="calc-btn" onclick="beamCalc()">
+Calculate Beam Volume
+</button>
 
-<label>Beam Depth (m)</label>
-<input type="number" id="beamDepth" placeholder="Example: 0.30">
+<button class="reset-btn" onclick="resetCard('rccbeam')">
+↻ Reset
+</button>
 
-<button onclick="calculateBeam()">Calculate Beam Volume</button>
+<div class="result" id="beamResult">
+Result will appear here.
+</div>
 
-<div class="result" id="beamResult"></div>
+<div class="result-actions">
+<button class="small-btn" onclick="shareResult('beamResult')">📤 Share</button>
+<button class="small-btn" onclick="printResult('beamResult')">🖨️ PDF</button>
 </div>
 
 </div>
 
+</div>
 
-<script>
+<!-- SEO -->
 
-/* 1 CONCRETE */
+<section class="seo-section">
 
-function calculateConcrete(){
+<h2>📚 Civil Engineering Calculators Online</h2>
 
-const length=parseFloat(document.getElementById("length").value);
-const width=parseFloat(document.getElementById("width").value);
-const depth=parseFloat(document.getElementById("depth").value);
+<p>
+CivilCalcAI is a free online collection of civil engineering calculation tools.
+It is designed to make common construction and engineering calculations faster
+and easier on smartphones and computers.
+</p>
 
-if(!valid(length,width,depth)){
-document.getElementById("concreteResult").innerHTML=
-"⚠️ Please enter valid values.";
-return;
-}
+<h3>Concrete Volume Calculator</h3>
+<p>
+The concrete volume calculator uses length × width × depth to estimate
+the volume of rectangular concrete.
+</p>
 
-const volume=length*width*depth;
+<h3>Steel Weight Calculator</h3>
+<p>
+For round steel bars, a commonly used theoretical unit-weight formula is
+d² ÷ 162 kg/m, where d is diameter in millimetres.
+</p>
 
-document.getElementById("concreteResult").innerHTML=
-"Concrete Volume = "+volume.toFixed(3)+" m³";
-}
+<h3>Brick Calculator</h3>
+<p>
+The brick calculator provides an approximate brick quantity based on wall area.
+Actual quantity depends on brick dimensions, mortar joints and wastage.
+</p>
 
+<h3>RCC Beam Calculator</h3>
+<p>
+The RCC beam calculator estimates beam concrete volume using beam width,
+depth and length.
+</p>
 
-/* 2 BRICKS */
+<h3>Construction Cost Calculator</h3>
+<p>
+Enter material quantities and rates to estimate the total cost of the
+entered materials.
+</p>
 
-function calculateBricks(){
+<h3>Who can use CivilCalcAI?</h3>
 
-const length=parseFloat(document.getElementById("wallLength").value);
-const height=parseFloat(document.getElementById("wallHeight").value);
+<ul>
+<li>Civil engineering students</li>
+<li>Site supervisors</li>
+<li>Contractors</li>
+<li>Construction workers</li>
+<li>Engineers and technicians</li>
+<li>Construction learners</li>
+</ul>
 
-if(!valid(length,height)){
-document.getElementById("brickResult").innerHTML=
-"⚠️ Please enter valid values.";
-return;
-}
+</section>
 
-const wallArea=length*height;
-const bricks=wallArea*60;
+<!-- HOW TO USE -->
 
-document.getElementById("brickResult").innerHTML=
-"Wall Area = "+wallArea.toFixed(2)+" m²<br>"+
-"Approx. Bricks Required = "+Math.ceil(bricks);
-}
+<section class="seo-section">
 
+<h2>📖 How to Use CivilCalcAI</h2>
 
-/* 3 STEEL */
+<h3>Step 1 — Select a calculator</h3>
+<p>
+Choose the calculator you need.
+</p>
 
-function calculateSteel(){
+<h3>Step 2 — Enter measurements</h3>
+<p>
+Enter the required dimensions and quantities.
+</p>
 
-const diameter=parseFloat(document.getElementById("diameter").value);
-const length=parseFloat(document.getElementById("steelLength").value);
+<h3>Step 3 — Calculate</h3>
+<p>
+Tap the Calculate button to see the result.
+</p>
 
-if(!valid(diameter,length)){
-document.getElementById("steelResult").innerHTML=
-"⚠️ Please enter valid values.";
-return;
-}
+<h3>Step 4 — Share or PDF</h3>
+<p>
+Use Share to send the result or PDF to print/save the result.
+</p>
 
-const weightPerMeter=(diameter*diameter)/162;
-const totalWeight=weightPerMeter*length;
+</section>
 
-document.getElementById("steelResult").innerHTML=
-"Weight per metre = "+weightPerMeter.toFixed(2)+" kg/m<br>"+
-"Total Steel Weight = "+totalWeight.toFixed(2)+" kg";
-}
+<!-- FAQ -->
 
+<section id="faq" class="seo-section">
 
-/* 4 CEMENT & SAND */
+<div class="section-title">
+<h2>❓ Frequently Asked Questions</h2>
+<p>Common questions about civil engineering calculations.</p>
+</div>
 
-function calculateCementSand(){
+<div class="faq-item">
 
-const volume=parseFloat(document.getElementById("csVolume").value);
-const ratio=parseFloat(document.getElementById("cementRatio").value);
+<div class="faq-question" onclick="toggleFaq(this)">
+What is a concrete volume calculator?
+</div>
 
-if(!valid(volume)){
-document.getElementById("cementSandResult").innerHTML=
-"⚠️ Please enter a valid volume.";
-return;
-}
+<div class="faq-answer">
+It calculates rectangular concrete volume using
+length × width × depth.
+</div>
 
-/* Dry volume factor */
-const dryVolume=volume*1.54;
+</div>
 
-const totalParts=1+2+ratio;
+<div class="faq-item">
 
-const cementVolume=dryVolume*(1/totalParts);
-const sandVolume=dryVolume*(2/totalParts);
-const aggregateVolume=dryVolume*(ratio/totalParts);
+<div class="faq-question" onclick="toggleFaq(this)">
+How is steel weight calculated?
+</div>
 
-const cementBags=cementVolume/0.0347;
+<div class="faq-answer">
+A commonly used theoretical formula for round steel is
+d² ÷ 162 kg/m, where d is diameter in millimetres.
+</div>
 
-document.getElementById("cementSandResult").innerHTML=
-"Dry Volume = "+dryVolume.toFixed(3)+" m³<br>"+
-"Cement = "+cementVolume.toFixed(3)+" m³<br>"+
-"Approx. Cement = "+cementBags.toFixed(1)+" bags<br>"+
-"Sand = "+sandVolume.toFixed(3)+" m³<br>"+
-"Aggregate = "+aggregateVolume.toFixed(3)+" m³";
-}
+</div>
 
+<div class="faq-item">
 
-/* 5 AREA */
+<div class="faq-question" onclick="toggleFaq(this)">
+Is CivilCalcAI free?
+</div>
 
-function calculateArea(){
+<div class="faq-answer">
+Yes. The calculators are designed to be available for free.
+</div>
 
-const length=parseFloat(document.getElementById("areaLength").value);
-const width=parseFloat(document.getElementById("areaWidth").value);
+</div>
 
-if(!valid(length,width)){
-document.getElementById("areaResult").innerHTML=
-"⚠️ Please enter valid values.";
-return;
-}
+<div class="faq-item">
 
-const area=length*width;
-
-document.getElementById("areaResult").innerHTML=
-"Area = "+area.toFixed(2)+" m²<br>"+
-"Area = "+(area*10.7639).toFixed(2)+" ft²";
-}
-
-
-/* 6 UNIT CONVERTER */
-
-function convertUnit(){
-
-const value=parseFloat(document.getElementById("convertValue").value);
-const from=document.getElementById("fromUnit").value;
-const to=document.getElementById("toUnit").value;
-
-if(!valid(value)){
-document.getElementById("converterResult").innerHTML=
-"⚠️ Please enter a valid value.";
-return;
-}
-
-const factors={
-m:1,
-ft:0.3048,
-cm:0.01,
-mm:0.001
-};
-
-const meters=value*factors[from];
-const result=meters/factors[to];
-
-document.getElementById("converterResult").innerHTML=
-"Result = "+result.toFixed(4)+" "+to;
-}
-
-
-/* 7 RCC BEAM */
-
-function calculateBeam(){
-
-const length=parseFloat(document.getElementById("beamLength").value);
-const width=parseFloat(document.getElementById("beamWidth").value);
-const depth=parseFloat(document.getElementById("beamDepth").value);
-
-if(!valid(length,width,depth)){
-document.getElementById("beamResult").innerHTML=
-"⚠️ Please enter valid values.";
-return;
-}
-
-const volume=length*width*depth;
-
-document.getElementById("beamResult").innerHTML=
-"RCC Beam Volume = "+volume.toFixed(3)+" m³";
-}
-
-
-/* VALIDATION */
-
-function valid(...values){
-return values.every(v=>Number.isFinite(v) && v>0);
-}
-
-</script>
-
-</body>
-</html>
+<div class="faq-q
