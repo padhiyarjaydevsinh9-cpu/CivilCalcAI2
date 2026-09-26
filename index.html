@@ -1,5 +1,5 @@
 
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -73,6 +73,11 @@ button{
   background:#0d47a1;
   color:white;
   font-size:17px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1565c0;
 }
 
 .result{
@@ -94,6 +99,7 @@ button{
 
 <div class="container">
 
+<!-- Concrete Calculator -->
 <div class="card">
 <h2>🧱 Concrete Volume</h2>
 
@@ -112,6 +118,7 @@ button{
 </div>
 
 
+<!-- Brick Calculator -->
 <div class="card">
 <h2>🧱 Brick Calculator</h2>
 
@@ -127,6 +134,7 @@ button{
 </div>
 
 
+<!-- Steel Calculator -->
 <div class="card">
 <h2>🔩 Steel Weight Calculator</h2>
 
@@ -143,8 +151,10 @@ button{
 
 </div>
 
+
 <script>
 
+// Concrete Calculator
 function calculateConcrete(){
 
 let length=parseFloat(document.getElementById("length").value);
@@ -152,7 +162,8 @@ let width=parseFloat(document.getElementById("width").value);
 let depth=parseFloat(document.getElementById("depth").value);
 
 if(isNaN(length)||isNaN(width)||isNaN(depth)){
-document.getElementById("concreteResult").innerHTML="⚠️ Please enter all values.";
+document.getElementById("concreteResult").innerHTML=
+"⚠️ Please enter all values.";
 return;
 }
 
@@ -163,13 +174,15 @@ document.getElementById("concreteResult").innerHTML=
 }
 
 
+// Brick Calculator
 function calculateBricks(){
 
 let length=parseFloat(document.getElementById("wallLength").value);
 let height=parseFloat(document.getElementById("wallHeight").value);
 
 if(isNaN(length)||isNaN(height)){
-document.getElementById("brickResult").innerHTML="⚠️ Please enter all values.";
+document.getElementById("brickResult").innerHTML=
+"⚠️ Please enter all values.";
 return;
 }
 
@@ -181,13 +194,15 @@ document.getElementById("brickResult").innerHTML=
 }
 
 
+// Steel Calculator
 function calculateSteel(){
 
 let diameter=parseFloat(document.getElementById("diameter").value);
 let length=parseFloat(document.getElementById("steelLength").value);
 
 if(isNaN(diameter)||isNaN(length)){
-document.getElementById("steelResult").innerHTML="⚠️ Please enter all values.";
+document.getElementById("steelResult").innerHTML=
+"⚠️ Please enter all values.";
 return;
 }
 
@@ -196,11 +211,10 @@ let totalWeight=weightPerMeter*length;
 
 document.getElementById("steelResult").innerHTML=
 "Weight per metre = "+weightPerMeter.toFixed(2)+" kg/m<br>"+
-"Total Steel Weight = "+totalWeight.toFixed(2)+" kg
-  
+"Total Steel Weight = "+totalWeight.toFixed(2)+" kg";
 }
 
 </script>
 
 </body>
-</html>
+</html>.
