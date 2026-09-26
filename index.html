@@ -170,6 +170,34 @@ button:hover{
 <div class="result" id="materialResult"></div>
 </div>
 
+
+<!-- Cost Calculator -->
+<div class="card">
+<h2>💰 Construction Cost Calculator</h2>
+
+<label>Cement Quantity (bags)</label>
+<input type="number" id="costCementQty" placeholder="Example: 6.34">
+
+<label>Cement Rate (₹ per bag)</label>
+<input type="number" id="cementRate" placeholder="Example: 400">
+
+<label>Sand Quantity (m³)</label>
+<input type="number" id="costSandQty" placeholder="Example: 0.44">
+
+<label>Sand Rate (₹ per m³)</label>
+<input type="number" id="sandRate" placeholder="Example: 1500">
+
+<label>Aggregate Quantity (m³)</label>
+<input type="number" id="costAggregateQty" placeholder="Example: 0.88">
+
+<label>Aggregate Rate (₹ per m³)</label>
+<input type="number" id="aggregateRate" placeholder="Example: 1400">
+
+<button onclick="calculateCost()">Calculate Total Cost</button>
+
+<div class="result" id="costResult"></div>
+</div>
+
 </div>
 
 
@@ -270,6 +298,45 @@ document.getElementById("materialResult").innerHTML=
 "Cement = "+cementBags.toFixed(2)+" bags<br>"+
 "Sand = "+sandVolume.toFixed(3)+" m³<br>"+
 "Aggregate = "+aggregateVolume.toFixed(3)+" m³";
+}
+
+
+// Construction Cost Calculator
+function calculateCost(){
+
+let cementQty=parseFloat(document.getElementById("costCementQty").value);
+let cementRate=parseFloat(document.getElementById("cementRate").value);
+
+let sandQty=parseFloat(document.getElementById("costSandQty").value);
+let sandRate=parseFloat(document.getElementById("sandRate").value);
+
+let aggregateQty=parseFloat(document.getElementById("costAggregateQty").value);
+let aggregateRate=parseFloat(document.getElementById("aggregateRate").value);
+
+if(
+isNaN(cementQty) ||
+isNaN(cementRate) ||
+isNaN(sandQty) ||
+isNaN(sandRate) ||
+isNaN(aggregateQty) ||
+isNaN(aggregateRate)
+){
+document.getElementById("costResult").innerHTML=
+"⚠️ Please enter all values.";
+return;
+}
+
+let cementCost=cementQty*cementRate;
+let sandCost=sandQty*sandRate;
+let aggregateCost=aggregateQty*aggregateRate;
+
+let totalCost=cementCost+sandCost+aggregateCost;
+
+document.getElementById("costResult").innerHTML=
+"Cement Cost = ₹"+cementCost.toFixed(2)+"<br>"+
+"Sand Cost = ₹"+sandCost.toFixed(2)+"<br>"+
+"Aggregate Cost = ₹"+aggregateCost.toFixed(2)+"<br><br>"+
+"💰 Total Estimated Cost = ₹"+totalCost.toFixed(2);
 }
 
 </script>
