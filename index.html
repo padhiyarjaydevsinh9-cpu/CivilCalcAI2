@@ -116,6 +116,14 @@ button:hover{
   background:#1b5e20;
 }
 
+.print{
+  background:#6a1b9a;
+}
+
+.print:hover{
+  background:#4a148c;
+}
+
 .result{
   margin-top:15px;
   padding:15px;
@@ -167,6 +175,36 @@ footer{
     padding:16px;
   }
 }
+
+/* PRINT */
+@media print{
+
+  body{
+    background:white;
+  }
+
+  header{
+    background:white;
+    color:#000;
+    border-bottom:2px solid #000;
+  }
+
+  .welcome,
+  .card:not(.print-card),
+  footer{
+    display:none;
+  }
+
+  .print-area{
+    display:block !important;
+    box-shadow:none;
+    border:none;
+  }
+
+  .print-area button{
+    display:none;
+  }
+}
 </style>
 </head>
 
@@ -186,6 +224,7 @@ footer{
     quickly and easily.
   </p>
 </div>
+
 
 <!-- CONCRETE -->
 <div class="card">
@@ -306,6 +345,18 @@ footer{
   </button>
 </div>
 
+
+<!-- PRINT AREA -->
+<div id="printArea" class="card print-area" style="display:none;">
+  <h2>📄 CivilCalcAI Result</h2>
+
+  <div id="printContent" class="result"></div>
+
+  <button class="print" onclick="printResult()">
+    🖨️ Print / Save as PDF
+  </button>
+</div>
+
 </div>
 
 
@@ -323,7 +374,8 @@ let lastResult = "";
 
 function saveHistory(title, result){
 
-  let history = JSON.parse(localStorage.getItem("civilCalcHistory")) || [];
+  let history =
+    JSON.parse(localStorage.getItem("civilCalcHistory")) || [];
 
   history.unshift({
     title:title,
@@ -335,7 +387,10 @@ function saveHistory(title, result){
     history = history.slice(0,20);
   }
 
-  localStorage.setItem("civilCalcHistory",JSON.stringify(history));
+  localStorage.setItem(
+    "civilCalcHistory",
+    JSON.stringify(history)
+  );
 
   displayHistory();
 }
@@ -343,7 +398,8 @@ function saveHistory(title, result){
 
 function displayHistory(){
 
-  let history = JSON.parse(localStorage.getItem("civilCalcHistory")) || [];
+  let history =
+    JSON.parse(localStorage.getItem("civilCalcHistory")) || [];
 
   let list = document.getElementById("historyList");
 
@@ -379,6 +435,8 @@ function clearHistory(){
 }
 
 
+/* SHARE */
+
 function shareResult(){
 
   if(!lastResult){
@@ -403,13 +461,47 @@ function shareResult(){
 }
 
 
+/* PRINT */
+
+function showPrintResult(){
+
+  if(!lastResult){
+    alert("Please calculate something first.");
+    return;
+  }
+
+  let printArea = document.getElementById("printArea");
+  let printContent = document.getElementById("printContent");
+
+  printContent.innerText = lastResult;
+
+  printArea.style.display = "block";
+
+  printArea.scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+
+function printResult(){
+
+  window.print();
+
+}
+
+
 /* CONCRETE */
 
 function calculateConcrete(){
 
-  let length = parseFloat(document.getElementById("conLength").value);
-  let width = parseFloat(document.getElementById("conWidth").value);
-  let depth = parseFloat(document.getElementById("conDepth").value);
+  let length =
+    parseFloat(document.getElementById("conLength").value);
+
+  let width =
+    parseFloat(document.getElementById("conWidth").value);
+
+  let depth =
+    parseFloat(document.getElementById("conDepth").value);
 
   if(!length || !width || !depth){
     alert("Please enter all values.");
@@ -419,21 +511,30 @@ function calculateConcrete(){
   let volume = length * width * depth;
 
   lastResult =
-    "CivilCalcAI - Concrete Volume\n" +
+    "CivilCalcAI - Concrete Volume\n\n" +
     "Length: " + length + " m\n" +
     "Width: " + width + " m\n" +
-    "Depth: " + depth + " m\n" +
+    "Depth: " + depth + " m\n\n" +
     "Concrete Volume: " + volume.toFixed(3) + " m³";
 
-  let result = document.getElementById("conResult");
+  let result =
+    document.getElementById("conResult");
 
   result.innerHTML =
-    "Concrete Volume = " + volume.toFixed(3) + " m³" +
-    '<button class="share" onclick="shareResult()">📤 Share Result</button>';
+    "Concrete Volume = " +
+    volume.toFixed(3) +
+    " m³" +
+
+    '<button class="share" onclick="shareResult()">📤 Share Result</button>' +
+
+    '<button class="print" onclick="showPrintResult()">🖨️ Print / Save PDF</button>';
 
   result.style.display = "block";
 
-  saveHistory("🧱 Concrete Volume", "Volume = " + volume.toFixed(3) + " m³");
+  saveHistory(
+    "🧱 Concrete Volume",
+    "Volume = " + volume.toFixed(3) + " m³"
+  );
 }
 
 
@@ -451,8 +552,11 @@ function resetConcrete(){
 
 function calculateBricks(){
 
-  let length = parseFloat(document.getElementById("brickLength").value);
-  let height = parseFloat(document.getElementById("brickHeight").value);
+  let length =
+    parseFloat(document.getElementById("brickLength").value);
+
+  let height =
+    parseFloat(document.getElementById("brickHeight").value);
 
   if(!length || !height){
     alert("Please enter all values.");
@@ -460,21 +564,30 @@ function calculateBricks(){
   }
 
   let wallArea = length * height;
+
   let bricks = wallArea * 60;
 
   lastResult =
-    "CivilCalcAI - Brick Calculator\n" +
+    "CivilCalcAI - Brick Calculator\n\n" +
     "Wall Length: " + length + " m\n" +
     "Wall Height: " + height + " m\n" +
-    "Wall Area: " + wallArea.toFixed(2) + " m²\n" +
+    "Wall Area: " + wallArea.toFixed(2) + " m²\n\n" +
     "Approx Bricks: " + Math.ceil(bricks);
 
-  let result = document.getElementById("brickResult");
+  let result =
+    document.getElementById("brickResult");
 
   result.innerHTML =
-    "Wall Area = " + wallArea.toFixed(2) + " m²<br>" +
-    "Approx Bricks = " + Math.ceil(bricks) +
-    '<button class="share" onclick="shareResult()">📤 Share Result</button>';
+    "Wall Area = " +
+    wallArea.toFixed(2) +
+    " m²<br>" +
+
+    "Approx Bricks = " +
+    Math.ceil(bricks) +
+
+    '<button class="share" onclick="shareResult()">📤 Share Result</button>' +
+
+    '<button class="print" onclick="showPrintResult()">🖨️ Print / Save PDF</button>';
 
   result.style.display="block";
 
@@ -498,35 +611,52 @@ function resetBricks(){
 
 function calculateSteel(){
 
-  let dia = parseFloat(document.getElementById("steelDia").value);
-  let length = parseFloat(document.getElementById("steelLength").value);
+  let dia =
+    parseFloat(document.getElementById("steelDia").value);
+
+  let length =
+    parseFloat(document.getElementById("steelLength").value);
 
   if(!dia || !length){
     alert("Please enter all values.");
     return;
   }
 
-  let weightPerMeter = (dia * dia) / 162;
-  let totalWeight = weightPerMeter * length;
+  let weightPerMeter =
+    (dia * dia) / 162;
+
+  let totalWeight =
+    weightPerMeter * length;
 
   lastResult =
-    "CivilCalcAI - Steel Weight\n" +
+    "CivilCalcAI - Steel Weight\n\n" +
     "Diameter: " + dia + " mm\n" +
-    "Length: " + length + " m\n" +
+    "Length: " + length + " m\n\n" +
     "Weight: " + totalWeight.toFixed(2) + " kg";
 
-  let result = document.getElementById("steelResult");
+  let result =
+    document.getElementById("steelResult");
 
   result.innerHTML =
-    "Weight per metre = " + weightPerMeter.toFixed(2) + " kg/m<br>" +
-    "Total Weight = " + totalWeight.toFixed(2) + " kg" +
-    '<button class="share" onclick="shareResult()">📤 Share Result</button>';
+    "Weight per metre = " +
+    weightPerMeter.toFixed(2) +
+    " kg/m<br>" +
+
+    "Total Weight = " +
+    totalWeight.toFixed(2) +
+    " kg" +
+
+    '<button class="share" onclick="shareResult()">📤 Share Result</button>' +
+
+    '<button class="print" onclick="showPrintResult()">🖨️ Print / Save PDF</button>';
 
   result.style.display="block";
 
   saveHistory(
     "🔩 Steel Weight",
-    "Total Weight = " + totalWeight.toFixed(2) + " kg"
+    "Total Weight = " +
+    totalWeight.toFixed(2) +
+    " kg"
   );
 }
 
@@ -544,49 +674,102 @@ function resetSteel(){
 
 function calculateMaterials(){
 
-  let volume = parseFloat(document.getElementById("matVolume").value);
-  let cementRatio = parseFloat(document.getElementById("cementRatio").value);
-  let sandRatio = parseFloat(document.getElementById("sandRatio").value);
-  let aggRatio = parseFloat(document.getElementById("aggRatio").value);
+  let volume =
+    parseFloat(document.getElementById("matVolume").value);
 
-  if(!volume || !cementRatio || !sandRatio || !aggRatio){
+  let cementRatio =
+    parseFloat(document.getElementById("cementRatio").value);
+
+  let sandRatio =
+    parseFloat(document.getElementById("sandRatio").value);
+
+  let aggRatio =
+    parseFloat(document.getElementById("aggRatio").value);
+
+  if(
+    !volume ||
+    !cementRatio ||
+    !sandRatio ||
+    !aggRatio
+  ){
     alert("Please enter all values.");
     return;
   }
 
-  let dryVolume = volume * 1.54;
+  let dryVolume =
+    volume * 1.54;
 
-  let totalRatio = cementRatio + sandRatio + aggRatio;
+  let totalRatio =
+    cementRatio +
+    sandRatio +
+    aggRatio;
 
-  let cementVolume = dryVolume * cementRatio / totalRatio;
-  let sandVolume = dryVolume * sandRatio / totalRatio;
-  let aggVolume = dryVolume * aggRatio / totalRatio;
+  let cementVolume =
+    dryVolume *
+    cementRatio /
+    totalRatio;
 
-  let cementBags = (cementVolume * 1440) / 50;
+  let sandVolume =
+    dryVolume *
+    sandRatio /
+    totalRatio;
+
+  let aggVolume =
+    dryVolume *
+    aggRatio /
+    totalRatio;
+
+  let cementBags =
+    (cementVolume * 1440) / 50;
 
   lastResult =
-    "CivilCalcAI - Cement & Sand Calculator\n" +
+    "CivilCalcAI - Cement & Sand Calculator\n\n" +
     "Concrete Volume: " + volume + " m³\n" +
-    "Mix Ratio: " + cementRatio + ":" + sandRatio + ":" + aggRatio + "\n" +
-    "Cement: " + cementBags.toFixed(2) + " bags\n" +
-    "Sand: " + sandVolume.toFixed(3) + " m³\n" +
-    "Aggregate: " + aggVolume.toFixed(3) + " m³";
+    "Mix Ratio: " +
+    cementRatio + ":" +
+    sandRatio + ":" +
+    aggRatio + "\n\n" +
+    "Cement: " +
+    cementBags.toFixed(2) +
+    " bags\n" +
+    "Sand: " +
+    sandVolume.toFixed(3) +
+    " m³\n" +
+    "Aggregate: " +
+    aggVolume.toFixed(3) +
+    " m³";
 
-  let result = document.getElementById("matResult");
+  let result =
+    document.getElementById("matResult");
 
   result.innerHTML =
-    "Cement = " + cementBags.toFixed(2) + " bags<br>" +
-    "Sand = " + sandVolume.toFixed(3) + " m³<br>" +
-    "Aggregate = " + aggVolume.toFixed(3) + " m³" +
-    '<button class="share" onclick="shareResult()">📤 Share Result</button>';
+    "Cement = " +
+    cementBags.toFixed(2) +
+    " bags<br>" +
+
+    "Sand = " +
+    sandVolume.toFixed(3) +
+    " m³<br>" +
+
+    "Aggregate = " +
+    aggVolume.toFixed(3) +
+    " m³" +
+
+    '<button class="share" onclick="shareResult()">📤 Share Result</button>' +
+
+    '<button class="print" onclick="showPrintResult()">🖨️ Print / Save PDF</button>';
 
   result.style.display="block";
 
   saveHistory(
     "🏗️ Cement & Sand",
-    "Cement = " + cementBags.toFixed(2) +
-    " bags, Sand = " + sandVolume.toFixed(3) +
-    " m³, Aggregate = " + aggVolume.toFixed(3) + " m³"
+    "Cement = " +
+    cementBags.toFixed(2) +
+    " bags, Sand = " +
+    sandVolume.toFixed(3) +
+    " m³, Aggregate = " +
+    aggVolume.toFixed(3) +
+    " m³"
   );
 }
 
@@ -606,51 +789,94 @@ function resetMaterials(){
 
 function calculateCost(){
 
-  let cementQty = parseFloat(document.getElementById("cementQty").value);
-  let cementRate = parseFloat(document.getElementById("cementRate").value);
+  let cementQty =
+    parseFloat(document.getElementById("cementQty").value);
 
-  let sandQty = parseFloat(document.getElementById("sandQty").value);
-  let sandRate = parseFloat(document.getElementById("sandRate").value);
+  let cementRate =
+    parseFloat(document.getElementById("cementRate").value);
 
-  let aggQty = parseFloat(document.getElementById("aggQty").value);
-  let aggRate = parseFloat(document.getElementById("aggRate").value);
+  let sandQty =
+    parseFloat(document.getElementById("sandQty").value);
+
+  let sandRate =
+    parseFloat(document.getElementById("sandRate").value);
+
+  let aggQty =
+    parseFloat(document.getElementById("aggQty").value);
+
+  let aggRate =
+    parseFloat(document.getElementById("aggRate").value);
 
   if(
-    !cementQty || !cementRate ||
-    !sandQty || !sandRate ||
-    !aggQty || !aggRate
+    !cementQty ||
+    !cementRate ||
+    !sandQty ||
+    !sandRate ||
+    !aggQty ||
+    !aggRate
   ){
     alert("Please enter all values.");
     return;
   }
 
-  let cementCost = cementQty * cementRate;
-  let sandCost = sandQty * sandRate;
-  let aggCost = aggQty * aggRate;
+  let cementCost =
+    cementQty * cementRate;
 
-  let totalCost = cementCost + sandCost + aggCost;
+  let sandCost =
+    sandQty * sandRate;
+
+  let aggCost =
+    aggQty * aggRate;
+
+  let totalCost =
+    cementCost +
+    sandCost +
+    aggCost;
 
   lastResult =
-    "CivilCalcAI - Construction Cost\n" +
-    "Cement Cost: ₹" + cementCost.toFixed(2) + "\n" +
-    "Sand Cost: ₹" + sandCost.toFixed(2) + "\n" +
-    "Aggregate Cost: ₹" + aggCost.toFixed(2) + "\n" +
-    "Total Estimated Cost: ₹" + totalCost.toFixed(2);
+    "CivilCalcAI - Construction Cost\n\n" +
+    "Cement Cost: ₹" +
+    cementCost.toFixed(2) + "\n" +
 
-  let result = document.getElementById("costResult");
+    "Sand Cost: ₹" +
+    sandCost.toFixed(2) + "\n" +
+
+    "Aggregate Cost: ₹" +
+    aggCost.toFixed(2) + "\n\n" +
+
+    "Total Estimated Cost: ₹" +
+    totalCost.toFixed(2);
+
+  let result =
+    document.getElementById("costResult");
 
   result.innerHTML =
-    "Cement Cost = ₹" + cementCost.toFixed(2) + "<br>" +
-    "Sand Cost = ₹" + sandCost.toFixed(2) + "<br>" +
-    "Aggregate Cost = ₹" + aggCost.toFixed(2) + "<br>" +
-    "<strong>Total Cost = ₹" + totalCost.toFixed(2) + "</strong>" +
-    '<button class="share" onclick="shareResult()">📤 Share Result</button>';
+    "Cement Cost = ₹" +
+    cementCost.toFixed(2) +
+    "<br>" +
+
+    "Sand Cost = ₹" +
+    sandCost.toFixed(2) +
+    "<br>" +
+
+    "Aggregate Cost = ₹" +
+    aggCost.toFixed(2) +
+    "<br>" +
+
+    "<strong>Total Cost = ₹" +
+    totalCost.toFixed(2) +
+    "</strong>" +
+
+    '<button class="share" onclick="shareResult()">📤 Share Result</button>' +
+
+    '<button class="print" onclick="showPrintResult()">🖨️ Print / Save PDF</button>';
 
   result.style.display="block";
 
   saveHistory(
     "💰 Construction Cost",
-    "Total Cost = ₹" + totalCost.toFixed(2)
+    "Total Cost = ₹" +
+    totalCost.toFixed(2)
   );
 }
 
