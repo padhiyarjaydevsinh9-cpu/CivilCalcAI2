@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Google Search Console Verification -->
 <meta name="google-site-verification" content="s7ZoG4qNkOB56BKa41x6cnvY9mZMfmp2IKbLq_usp9g">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,6 @@
 
 <meta name="keywords" content="civil engineering calculator, concrete calculator, brick calculator, steel weight calculator, rebar calculator, RCC beam calculator, construction cost calculator">
 
-<meta name="author" content="CivilCalcAI">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://civilcalcai2.github.io/CivilCalcAI2/">
@@ -195,11 +193,6 @@ header{
     outline:none;
 }
 
-.card input:focus,
-.card select:focus{
-    border-color:#168ff0;
-}
-
 .calc-btn{
     width:100%;
     margin-top:16px;
@@ -314,37 +307,6 @@ header{
     display:block;
 }
 
-.history-box{
-    background:white;
-    padding:22px;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(20,50,90,.09);
-}
-
-.history-item{
-    padding:12px;
-    border-bottom:1px solid #e3e9f1;
-    font-size:14px;
-}
-
-.clear-btn{
-    background:#d93636;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    margin-top:12px;
-}
-
-.about{
-    background:linear-gradient(135deg,#eaf5ff,#f8fbff);
-    padding:25px;
-    border-radius:16px;
-    margin-top:30px;
-}
-
 footer{
     background:#10243d;
     color:#dce7f4;
@@ -352,10 +314,6 @@ footer{
     padding:25px 15px;
     margin-top:40px;
     font-size:14px;
-}
-
-footer p{
-    margin:5px;
 }
 
 @media(max-width:850px){
@@ -410,38 +368,7 @@ footer p{
         flex-direction:column;
     }
 }
-
-@media print{
-    header,
-    .hero,
-    .popular-section,
-    .calculators,
-    .seo-section,
-    .about,
-    footer,
-    .info-box{
-        display:none!important;
-    }
-
-    body{
-        background:white;
-    }
-
-    #history{
-        display:block!important;
-    }
-}
 </style>
-
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebSite",
- "name":"CivilCalcAI",
- "url":"https://civilcalcai2.github.io/CivilCalcAI2/",
- "description":"Free civil engineering calculators for construction and engineering calculations."
-}
-</script>
 </head>
 
 <body>
@@ -452,7 +379,6 @@ footer p{
 
 <div class="nav-links">
 <a href="#calculators">Calculators</a>
-<a href="#history">History</a>
 <a href="#faq">FAQ</a>
 <a href="#about">About</a>
 </div>
@@ -465,7 +391,7 @@ footer p{
 
 <p>
 Calculate concrete volume, bricks, steel weight, rebar,
-RCC beam, construction cost, materials, area, volume and units.
+RCC beam, construction cost, area, volume and units.
 </p>
 
 <div class="hero-buttons">
@@ -475,7 +401,7 @@ RCC beam, construction cost, materials, area, volume and units.
 
 </section>
 
-<section class="container popular-section">
+<section class="container">
 
 <div class="section-title">
 <h2>🔥 Popular Civil Calculators</h2>
@@ -505,9 +431,6 @@ RCC beam, construction cost, materials, area, volume and units.
 </div>
 
 </div>
-</section>
-
-<div class="container">
 
 <div class="info-box">
 <strong>⚠️ Important:</strong>
@@ -524,9 +447,7 @@ codes and a qualified engineer.
 <div class="calculators">
 
 <!-- CONCRETE -->
-
 <div class="card" id="concrete">
-
 <h3>🧱 Concrete Volume Calculator</h3>
 
 <label>Length (m)</label>
@@ -538,29 +459,19 @@ codes and a qualified engineer.
 <label>Depth (m)</label>
 <input id="conDepth" type="number" step="any" placeholder="Example: 0.15">
 
-<button class="calc-btn" onclick="concreteCalc()">
-Calculate Concrete
-</button>
+<button class="calc-btn" onclick="concreteCalc()">Calculate Concrete</button>
+<button class="reset-btn" onclick="resetCard('concrete')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('concrete')">
-↻ Reset
-</button>
-
-<div class="result" id="conResult">
-Result will appear here.
-</div>
+<div class="result" id="conResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('conResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('conResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('conResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- BRICK -->
-
 <div class="card" id="brick">
-
 <h3>🧱 Brick Calculator</h3>
 
 <label>Wall Length (m)</label>
@@ -569,29 +480,31 @@ Result will appear here.
 <label>Wall Height (m)</label>
 <input id="brickHeight" type="number" step="any" placeholder="Example: 3">
 
-<button class="calc-btn" onclick="brickCalc()">
-Calculate Bricks
-</button>
+<label>Wall Thickness (m)</label>
+<input id="brickThickness" type="number" step="any" value="0.23">
 
-<button class="reset-btn" onclick="resetCard('brick')">
-↻ Reset
-</button>
+<label>Brick Length (m)</label>
+<input id="brickSizeL" type="number" step="any" value="0.19">
 
-<div class="result" id="brickResult">
-Result will appear here.
-</div>
+<label>Brick Height (m)</label>
+<input id="brickSizeH" type="number" step="any" value="0.09">
+
+<label>Brick Width (m)</label>
+<input id="brickSizeW" type="number" step="any" value="0.09">
+
+<button class="calc-btn" onclick="brickCalc()">Calculate Bricks</button>
+<button class="reset-btn" onclick="resetCard('brick')">↻ Reset</button>
+
+<div class="result" id="brickResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('brickResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('brickResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('brickResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- STEEL -->
-
 <div class="card" id="steel">
-
 <h3>🔩 Steel Weight Calculator</h3>
 
 <label>Diameter (mm)</label>
@@ -600,29 +513,19 @@ Result will appear here.
 <label>Length (m)</label>
 <input id="steelLength" type="number" step="any" placeholder="Example: 10">
 
-<button class="calc-btn" onclick="steelCalc()">
-Calculate Steel Weight
-</button>
+<button class="calc-btn" onclick="steelCalc()">Calculate Steel Weight</button>
+<button class="reset-btn" onclick="resetCard('steel')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('steel')">
-↻ Reset
-</button>
-
-<div class="result" id="steelResult">
-Result will appear here.
-</div>
+<div class="result" id="steelResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('steelResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('steelResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('steelResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- MATERIAL -->
-
 <div class="card" id="materials">
-
 <h3>🏗️ Cement, Sand & Aggregate</h3>
 
 <label>Concrete Volume (m³)</label>
@@ -637,29 +540,19 @@ Result will appear here.
 <label>Aggregate Ratio</label>
 <input id="aggRatio" type="number" step="any" value="4">
 
-<button class="calc-btn" onclick="mixCalc()">
-Calculate Materials
-</button>
+<button class="calc-btn" onclick="mixCalc()">Calculate Materials</button>
+<button class="reset-btn" onclick="resetCard('materials')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('materials')">
-↻ Reset
-</button>
-
-<div class="result" id="mixResult">
-Result will appear here.
-</div>
+<div class="result" id="mixResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('mixResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('mixResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('mixResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- COST -->
-
 <div class="card" id="cost">
-
 <h3>💰 Construction Cost Calculator</h3>
 
 <label>Cement Quantity</label>
@@ -680,33 +573,22 @@ Result will appear here.
 <label>Aggregate Rate</label>
 <input id="aggRate" type="number" step="any" placeholder="₹ per unit">
 
-<button class="calc-btn" onclick="costCalc()">
-Calculate Cost
-</button>
+<button class="calc-btn" onclick="costCalc()">Calculate Cost</button>
+<button class="reset-btn" onclick="resetCard('cost')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('cost')">
-↻ Reset
-</button>
-
-<div class="result" id="costResult">
-Result will appear here.
-</div>
+<div class="result" id="costResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('costResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('costResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('costResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- AREA -->
-
 <div class="card" id="area">
-
 <h3>📐 Area Calculator</h3>
 
 <label>Shape</label>
-
 <select id="areaShape" onchange="updateAreaFields()">
 <option value="rectangle">Rectangle</option>
 <option value="triangle">Triangle</option>
@@ -715,33 +597,22 @@ Result will appear here.
 
 <div id="areaFields"></div>
 
-<button class="calc-btn" onclick="areaCalc()">
-Calculate Area
-</button>
+<button class="calc-btn" onclick="areaCalc()">Calculate Area</button>
+<button class="reset-btn" onclick="resetCard('area')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('area')">
-↻ Reset
-</button>
-
-<div class="result" id="areaResult">
-Result will appear here.
-</div>
+<div class="result" id="areaResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('areaResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('areaResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('areaResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- VOLUME -->
-
 <div class="card" id="volume">
-
 <h3>📦 Volume Calculator</h3>
 
 <label>Shape</label>
-
 <select id="volumeShape" onchange="updateVolumeFields()">
 <option value="cuboid">Cuboid / Box</option>
 <option value="cylinder">Cylinder</option>
@@ -749,36 +620,25 @@ Result will appear here.
 
 <div id="volumeFields"></div>
 
-<button class="calc-btn" onclick="volumeCalc()">
-Calculate Volume
-</button>
+<button class="calc-btn" onclick="volumeCalc()">Calculate Volume</button>
+<button class="reset-btn" onclick="resetCard('volume')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('volume')">
-↻ Reset
-</button>
-
-<div class="result" id="volumeResult">
-Result will appear here.
-</div>
+<div class="result" id="volumeResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('volumeResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('volumeResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('volumeResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- UNIT -->
-
 <div class="card" id="unit">
-
 <h3>📏 Unit Converter</h3>
 
 <label>Value</label>
 <input id="unitValue" type="number" step="any" placeholder="Example: 10">
 
 <label>From</label>
-
 <select id="unitFrom">
 <option value="meter">Meter</option>
 <option value="feet">Feet</option>
@@ -787,7 +647,6 @@ Result will appear here.
 </select>
 
 <label>To</label>
-
 <select id="unitTo">
 <option value="meter">Meter</option>
 <option value="feet">Feet</option>
@@ -795,29 +654,19 @@ Result will appear here.
 <option value="cm">Centimeter</option>
 </select>
 
-<button class="calc-btn" onclick="unitCalc()">
-Convert
-</button>
+<button class="calc-btn" onclick="unitCalc()">Convert</button>
+<button class="reset-btn" onclick="resetCard('unit')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('unit')">
-↻ Reset
-</button>
-
-<div class="result" id="unitResult">
-Result will appear here.
-</div>
+<div class="result" id="unitResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('unitResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('unitResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('unitResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- REBAR -->
-
 <div class="card" id="rebar">
-
 <h3>🔩 Rebar Calculator</h3>
 
 <label>Bar Diameter (mm)</label>
@@ -829,29 +678,19 @@ Result will appear here.
 <label>Number of Bars</label>
 <input id="rebarBars" type="number" step="any" placeholder="Example: 20">
 
-<button class="calc-btn" onclick="rebarCalc()">
-Calculate Rebar Weight
-</button>
+<button class="calc-btn" onclick="rebarCalc()">Calculate Rebar Weight</button>
+<button class="reset-btn" onclick="resetCard('rebar')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('rebar')">
-↻ Reset
-</button>
-
-<div class="result" id="rebarResult">
-Result will appear here.
-</div>
+<div class="result" id="rebarResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('rebarResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('rebarResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('rebarResult')">🖨️ Print</button>
 </div>
-
 </div>
 
 <!-- RCC BEAM -->
-
 <div class="card" id="rccbeam">
-
 <h3>🏗️ RCC Beam Calculator</h3>
 
 <label>Beam Width (mm)</label>
@@ -863,28 +702,18 @@ Result will appear here.
 <label>Beam Length (m)</label>
 <input id="beamLength" type="number" step="any" placeholder="Example: 5">
 
-<button class="calc-btn" onclick="beamCalc()">
-Calculate Beam Volume
-</button>
+<button class="calc-btn" onclick="beamCalc()">Calculate Beam Volume</button>
+<button class="reset-btn" onclick="resetCard('rccbeam')">↻ Reset</button>
 
-<button class="reset-btn" onclick="resetCard('rccbeam')">
-↻ Reset
-</button>
-
-<div class="result" id="beamResult">
-Result will appear here.
-</div>
+<div class="result" id="beamResult">Result will appear here.</div>
 
 <div class="result-actions">
 <button class="small-btn" onclick="shareResult('beamResult')">📤 Share</button>
-<button class="small-btn" onclick="printResult('beamResult')">🖨️ PDF</button>
+<button class="small-btn" onclick="printResult('beamResult')">🖨️ Print</button>
+</div>
 </div>
 
 </div>
-
-</div>
-
-<!-- SEO -->
 
 <section class="seo-section">
 
@@ -898,122 +727,157 @@ and easier on smartphones and computers.
 
 <h3>Concrete Volume Calculator</h3>
 <p>
-The concrete volume calculator uses length × width × depth to estimate
-the volume of rectangular concrete.
+Concrete volume is calculated using length × width × depth.
 </p>
 
 <h3>Steel Weight Calculator</h3>
 <p>
-For round steel bars, a commonly used theoretical unit-weight formula is
+For round steel bars, the commonly used theoretical unit-weight formula is
 d² ÷ 162 kg/m, where d is diameter in millimetres.
 </p>
 
 <h3>Brick Calculator</h3>
 <p>
-The brick calculator provides an approximate brick quantity based on wall area.
-Actual quantity depends on brick dimensions, mortar joints and wastage.
+The brick calculator provides an approximate quantity based on wall volume
+and brick volume. Mortar joints and wastage can change the actual quantity.
 </p>
 
 <h3>RCC Beam Calculator</h3>
 <p>
-The RCC beam calculator estimates beam concrete volume using beam width,
+The RCC beam calculator estimates concrete volume using beam width,
 depth and length.
 </p>
 
-<h3>Construction Cost Calculator</h3>
-<p>
-Enter material quantities and rates to estimate the total cost of the
-entered materials.
-</p>
-
-<h3>Who can use CivilCalcAI?</h3>
-
-<ul>
-<li>Civil engineering students</li>
-<li>Site supervisors</li>
-<li>Contractors</li>
-<li>Construction workers</li>
-<li>Engineers and technicians</li>
-<li>Construction learners</li>
-</ul>
-
 </section>
-
-<!-- HOW TO USE -->
-
-<section class="seo-section">
-
-<h2>📖 How to Use CivilCalcAI</h2>
-
-<h3>Step 1 — Select a calculator</h3>
-<p>
-Choose the calculator you need.
-</p>
-
-<h3>Step 2 — Enter measurements</h3>
-<p>
-Enter the required dimensions and quantities.
-</p>
-
-<h3>Step 3 — Calculate</h3>
-<p>
-Tap the Calculate button to see the result.
-</p>
-
-<h3>Step 4 — Share or PDF</h3>
-<p>
-Use Share to send the result or PDF to print/save the result.
-</p>
-
-</section>
-
-<!-- FAQ -->
 
 <section id="faq" class="seo-section">
 
 <div class="section-title">
 <h2>❓ Frequently Asked Questions</h2>
-<p>Common questions about civil engineering calculations.</p>
 </div>
 
 <div class="faq-item">
-
 <div class="faq-question" onclick="toggleFaq(this)">
 What is a concrete volume calculator?
 </div>
-
 <div class="faq-answer">
-It calculates rectangular concrete volume using
-length × width × depth.
+It calculates rectangular concrete volume using length × width × depth.
 </div>
-
 </div>
 
 <div class="faq-item">
-
 <div class="faq-question" onclick="toggleFaq(this)">
 How is steel weight calculated?
 </div>
-
 <div class="faq-answer">
-A commonly used theoretical formula for round steel is
-d² ÷ 162 kg/m, where d is diameter in millimetres.
+A commonly used theoretical formula for round steel is d² ÷ 162 kg/m.
 </div>
-
 </div>
 
 <div class="faq-item">
-
 <div class="faq-question" onclick="toggleFaq(this)">
 Is CivilCalcAI free?
 </div>
-
 <div class="faq-answer">
 Yes. The calculators are designed to be available for free.
 </div>
-
 </div>
 
-<div class="faq-item">
+</section>
 
-<div class="faq-q
+<section id="about" class="seo-section">
+
+<h2>ℹ️ About CivilCalcAI</h2>
+
+<p>
+CivilCalcAI provides simple online tools for civil engineering students,
+construction learners, site workers and other users who need quick
+engineering estimates.
+</p>
+
+</section>
+
+<footer>
+<p>🏗️ <strong>CivilCalcAI</strong></p>
+<p>Free Civil Engineering Calculators</p>
+<p>© 2026 CivilCalcAI</p>
+</footer>
+
+
+<script>
+
+/* -----------------------------
+   HELPER
+----------------------------- */
+
+function getNum(id){
+    return parseFloat(document.getElementById(id).value);
+}
+
+function validNumbers(values){
+    return values.every(v => Number.isFinite(v) && v >= 0);
+}
+
+function showResult(id,text){
+    document.getElementById(id).innerHTML = text;
+}
+
+
+/* -----------------------------
+   CONCRETE
+----------------------------- */
+
+function concreteCalc(){
+
+    const L = getNum("conLength");
+    const W = getNum("conWidth");
+    const D = getNum("conDepth");
+
+    if(!validNumbers([L,W,D]) || L===0 || W===0 || D===0){
+        showResult("conResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const volume = L * W * D;
+
+    showResult(
+        "conResult",
+        "✅ Concrete Volume = " + volume.toFixed(3) + " m³"
+    );
+}
+
+
+/* -----------------------------
+   BRICK
+----------------------------- */
+
+function brickCalc(){
+
+    const L = getNum("brickLength");
+    const H = getNum("brickHeight");
+    const T = getNum("brickThickness");
+
+    const bL = getNum("brickSizeL");
+    const bH = getNum("brickSizeH");
+    const bW = getNum("brickSizeW");
+
+    if(!validNumbers([L,H,T,bL,bH,bW]) ||
+       L===0 || H===0 || T===0 ||
+       bL===0 || bH===0 || bW===0){
+
+        showResult("brickResult","⚠️ Please enter valid values.");
+        return;
+    }
+
+    const wallVolume = L * H * T;
+    const brickVolume = bL * bH * bW;
+
+    const bricks = wallVolume / brickVolume;
+    const wastage = bricks * 0.05;
+    const total = Math.ceil(bricks + wastage);
+
+    showResult(
+        "brickResult",
+        "✅ Wall Volume = " + wallVolume.toFixed(3) +
+        " m³<br>" +
+        "🧱 Approx. Bricks = 
