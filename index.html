@@ -2,933 +2,207 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- Google Search Console Verification -->
-<meta name="google-site-verification" content="s7ZoG4qNkOB56BKa41x6cnvY9mZMfmp2IKbLq_usp9g" />
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CivilCalcAI | Civil Engineering Calculators</title>
-
-<meta name="description" content="Free online civil engineering calculators for concrete, bricks, steel, rebar, construction cost, area, volume and unit conversion.">
-
-<meta name="keywords" content="civil engineering calculator, concrete calculator, brick calculator, steel weight calculator, rebar calculator, construction cost calculator">
-
-<meta name="author" content="CivilCalcAI">
-<meta name="robots" content="index, follow">
-
-<link rel="canonical" href="https://civilcalcai2.github.io/CivilCalcAI2/">
+<title>CivilCalcAI</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f8ff;
-    color:#172033;
-    line-height:1.6;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f2f5f9;
+  color:#222;
 }
 
 header{
-    background:linear-gradient(135deg,#0757c8,#18a0fb);
-    color:white;
-    padding:16px 20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 3px 15px rgba(0,0,0,.15);
+  background:#0d47a1;
+  color:white;
+  padding:25px 15px;
+  text-align:center;
 }
 
-.nav{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
+header h1{
+  margin:0;
+  font-size:30px;
 }
 
-.logo{
-    font-size:23px;
-    font-weight:bold;
-}
-
-.nav-links{
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:14px;
-}
-
-.hero{
-    background:linear-gradient(135deg,#0757c8,#19a5ff);
-    color:white;
-    text-align:center;
-    padding:60px 20px;
-}
-
-.hero h1{
-    font-size:40px;
-    margin-bottom:12px;
-}
-
-.hero p{
-    max-width:720px;
-    margin:auto;
-    font-size:17px;
-}
-
-.btn{
-    display:inline-block;
-    background:white;
-    color:#0757c8;
-    padding:12px 20px;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:bold;
-    margin:20px 5px 0;
+header p{
+  margin:8px 0 0;
 }
 
 .container{
-    width:92%;
-    max-width:1100px;
-    margin:35px auto;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:22px;
-}
-
-.section-title h2{
-    font-size:28px;
-    color:#0757c8;
-}
-
-.section-title p{
-    color:#687386;
-}
-
-.popular-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.popular-card{
-    background:white;
-    padding:18px;
-    border-radius:14px;
-    text-align:center;
-    box-shadow:0 5px 18px rgba(20,50,90,.08);
-    cursor:pointer;
-}
-
-.popular-card .icon{
-    font-size:32px;
-}
-
-.calculators{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+  max-width:700px;
+  margin:20px auto;
+  padding:15px;
 }
 
 .card{
-    background:white;
-    padding:22px;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(20,50,90,.09);
+  background:white;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
-.card h3{
-    color:#0757c8;
-    margin-bottom:15px;
+.card h2{
+  color:#0d47a1;
 }
 
-.card label{
-    display:block;
-    font-weight:bold;
-    margin-top:10px;
-    font-size:14px;
+label{
+  display:block;
+  margin-top:12px;
+  font-weight:bold;
 }
 
-.card input,
-.card select{
-    width:100%;
-    padding:11px;
-    margin-top:5px;
-    border:1px solid #ccd6e5;
-    border-radius:8px;
-    font-size:15px;
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  box-sizing:border-box;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:16px;
 }
 
-.calc-btn{
-    width:100%;
-    margin-top:16px;
-    background:#0757c8;
-    color:white;
-    border:none;
-    padding:12px;
-    border-radius:9px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
+button{
+  width:100%;
+  margin-top:15px;
+  padding:13px;
+  border:0;
+  border-radius:7px;
+  background:#0d47a1;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
 }
 
 .result{
-    background:#eef7ff;
-    border-left:4px solid #087fe5;
-    padding:13px;
-    margin-top:15px;
-    border-radius:7px;
-    font-weight:bold;
-}
-
-.result-actions{
-    display:flex;
-    gap:8px;
-    margin-top:10px;
-}
-
-.small-btn{
-    flex:1;
-    padding:9px;
-    border:none;
-    border-radius:7px;
-    cursor:pointer;
-    background:#e4edf8;
-    font-weight:bold;
-}
-
-.info-box{
-    background:#fff8df;
-    border-left:5px solid #f0b400;
-    padding:16px;
-    border-radius:9px;
-    margin:25px 0;
-}
-
-.seo-section,
-.about,
-.history-box{
-    background:white;
-    padding:25px;
-    border-radius:16px;
-    margin-top:25px;
-    box-shadow:0 5px 18px rgba(20,50,90,.07);
-}
-
-.seo-section h2,
-.about h2{
-    color:#0757c8;
-    margin-bottom:12px;
-}
-
-.seo-section h3{
-    color:#183b68;
-    margin-top:18px;
-}
-
-.seo-section p,
-.about p{
-    color:#4c596d;
-    margin:8px 0;
-}
-
-.seo-section ul{
-    padding-left:22px;
-}
-
-.faq-item{
-    border-bottom:1px solid #dde5ef;
-    padding:15px 0;
-}
-
-.faq-question{
-    font-weight:bold;
-    color:#173f72;
-    cursor:pointer;
-}
-
-.faq-answer{
-    display:none;
-    margin-top:8px;
-    color:#596579;
-}
-
-.faq-item.open .faq-answer{
-    display:block;
-}
-
-.history-item{
-    padding:12px;
-    border-bottom:1px solid #e3e9f1;
-}
-
-.clear-btn{
-    background:#d93636;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    margin-top:12px;
-}
-
-footer{
-    background:#10243d;
-    color:#dce7f4;
-    text-align:center;
-    padding:25px 15px;
-    margin-top:40px;
-}
-
-@media(max-width:850px){
-    .popular-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .calculators{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:32px;
-    }
-}
-
-@media(max-width:520px){
-    .nav{
-        flex-direction:column;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-
-    .popular-grid{
-        grid-template-columns:1fr 1fr;
-    }
+  margin-top:15px;
+  padding:12px;
+  background:#e8f1ff;
+  border-radius:7px;
+  font-weight:bold;
 }
 </style>
-
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebSite",
- "name":"CivilCalcAI",
- "url":"https://civilcalcai2.github.io/CivilCalcAI2/",
- "description":"Free civil engineering calculators."
-}
-</script>
 </head>
 
 <body>
 
 <header>
-<div class="nav">
-<div class="logo">🏗️ CivilCalcAI</div>
-<div class="nav-links">
-<a href="#calculators">Calculators</a>
-<a href="#history">History</a>
-<a href="#faq">FAQ</a>
-<a href="#about">About</a>
-</div>
-</div>
+<h1>🏗️ CivilCalcAI</h1>
+<p>AI-powered Civil Engineering Calculator</p>
 </header>
-
-<section class="hero">
-<h1>Free Civil Engineering Calculators</h1>
-<p>
-Calculate concrete, bricks, steel, rebar, construction cost,
-area, volume and units quickly from your mobile.
-</p>
-
-<a class="btn" href="#calculators">🚀 Start Calculating</a>
-<a class="btn" href="#faq">❓ Learn More</a>
-</section>
-
-<section class="container">
-
-<div class="section-title">
-<h2>🔥 Popular Civil Calculators</h2>
-<p>Useful tools for students, engineers and construction work.</p>
-</div>
-
-<div class="popular-grid">
-
-<div class="popular-card" onclick="scrollToCalc('concrete')">
-<div class="icon">🧱</div>
-<h3>Concrete Volume</h3>
-</div>
-
-<div class="popular-card" onclick="scrollToCalc('steel')">
-<div class="icon">🔩</div>
-<h3>Steel Weight</h3>
-</div>
-
-<div class="popular-card" onclick="scrollToCalc('brick')">
-<div class="icon">🧱</div>
-<h3>Brick Calculator</h3>
-</div>
-
-<div class="popular-card" onclick="scrollToCalc('cost')">
-<div class="icon">💰</div>
-<h3>Construction Cost</h3>
-</div>
-
-</div>
-</section>
 
 <div class="container">
 
-<div class="info-box">
-<strong>⚠️ Important:</strong>
-These calculators provide estimates. Verify important calculations
-with project drawings, specifications, applicable codes and a qualified engineer.
-</div>
-
-<div id="calculators" class="section-title">
-<h2>📐 Civil Engineering Calculators</h2>
-<p>Enter your values and get an instant result.</p>
-</div>
-
-<div class="calculators">
-
-<!-- CONCRETE -->
-<div class="card" id="concrete">
-<h3>🧱 Concrete Volume Calculator</h3>
+<div class="card">
+<h2>🧱 Concrete Volume</h2>
 
 <label>Length (m)</label>
-<input id="conLength" type="number" step="any">
+<input type="number" id="length" placeholder="Example: 5">
 
 <label>Width (m)</label>
-<input id="conWidth" type="number" step="any">
+<input type="number" id="width" placeholder="Example: 3">
 
 <label>Depth (m)</label>
-<input id="conDepth" type="number" step="any">
+<input type="number" id="depth" placeholder="Example: 0.15">
 
-<button class="calc-btn" onclick="concreteCalc()">Calculate Concrete</button>
+<button onclick="calculateConcrete()">Calculate Volume</button>
 
-<div class="result" id="conResult">Result will appear here.</div>
+<div class="result" id="concreteResult"></div>
 </div>
 
-<!-- BRICK -->
-<div class="card" id="brick">
-<h3>🧱 Brick Calculator</h3>
+
+<div class="card">
+<h2>🧱 Brick Calculator</h2>
 
 <label>Wall Length (m)</label>
-<input id="brickLength" type="number" step="any">
+<input type="number" id="wallLength" placeholder="Example: 5">
 
 <label>Wall Height (m)</label>
-<input id="brickHeight" type="number" step="any">
+<input type="number" id="wallHeight" placeholder="Example: 3">
 
-<button class="calc-btn" onclick="brickCalc()">Calculate Bricks</button>
+<button onclick="calculateBricks()">Calculate Bricks</button>
 
-<div class="result" id="brickResult">Result will appear here.</div>
+<div class="result" id="brickResult"></div>
 </div>
 
-<!-- STEEL -->
-<div class="card" id="steel">
-<h3>🔩 Steel Weight Calculator</h3>
 
-<label>Diameter (mm)</label>
-<input id="steelDia" type="number" step="any">
-
-<label>Length (m)</label>
-<input id="steelLength" type="number" step="any">
-
-<button class="calc-btn" onclick="steelCalc()">Calculate Steel Weight</button>
-
-<div class="result" id="steelResult">Result will appear here.</div>
-</div>
-
-<!-- MATERIAL -->
 <div class="card">
-<h3>🏗️ Cement, Sand & Aggregate</h3>
+<h2>🔩 Steel Weight Calculator</h2>
 
-<label>Concrete Volume (m³)</label>
-<input id="mixVol" type="number" step="any">
+<label>Steel Diameter (mm)</label>
+<input type="number" id="diameter" placeholder="Example: 12">
 
-<label>Cement Ratio</label>
-<input id="cementRatio" type="number" value="1">
+<label>Steel Length (m)</label>
+<input type="number" id="steelLength" placeholder="Example: 10">
 
-<label>Sand Ratio</label>
-<input id="sandRatio" type="number" value="2">
+<button onclick="calculateSteel()">Calculate Steel Weight</button>
 
-<label>Aggregate Ratio</label>
-<input id="aggRatio" type="number" value="4">
-
-<button class="calc-btn" onclick="mixCalc()">Calculate Materials</button>
-
-<div class="result" id="mixResult">Result will appear here.</div>
-</div>
-
-<!-- COST -->
-<div class="card" id="cost">
-<h3>💰 Construction Cost Calculator</h3>
-
-<label>Cement Quantity</label>
-<input id="cementQty" type="number" step="any">
-
-<label>Cement Rate</label>
-<input id="cementRate" type="number" step="any">
-
-<label>Sand Quantity</label>
-<input id="sandQty" type="number" step="any">
-
-<label>Sand Rate</label>
-<input id="sandRate" type="number" step="any">
-
-<label>Aggregate Quantity</label>
-<input id="aggQty" type="number" step="any">
-
-<label>Aggregate Rate</label>
-<input id="aggRate" type="number" step="any">
-
-<button class="calc-btn" onclick="costCalc()">Calculate Cost</button>
-
-<div class="result" id="costResult">Result will appear here.</div>
-</div>
-
-<!-- AREA -->
-<div class="card">
-<h3>📐 Area Calculator</h3>
-
-<label>Shape</label>
-<select id="areaShape" onchange="updateAreaFields()">
-<option value="rectangle">Rectangle</option>
-<option value="triangle">Triangle</option>
-<option value="circle">Circle</option>
-</select>
-
-<div id="areaFields"></div>
-
-<button class="calc-btn" onclick="areaCalc()">Calculate Area</button>
-
-<div class="result" id="areaResult">Result will appear here.</div>
-</div>
-
-<!-- VOLUME -->
-<div class="card">
-<h3>📦 Volume Calculator</h3>
-
-<label>Shape</label>
-<select id="volumeShape" onchange="updateVolumeFields()">
-<option value="cuboid">Cuboid / Box</option>
-<option value="cylinder">Cylinder</option>
-</select>
-
-<div id="volumeFields"></div>
-
-<button class="calc-btn" onclick="volumeCalc()">Calculate Volume</button>
-
-<div class="result" id="volumeResult">Result will appear here.</div>
-</div>
-
-<!-- UNIT -->
-<div class="card">
-<h3>📏 Unit Converter</h3>
-
-<label>Value</label>
-<input id="unitValue" type="number" step="any">
-
-<label>From</label>
-<select id="unitFrom">
-<option value="meter">Meter</option>
-<option value="feet">Feet</option>
-<option value="inch">Inch</option>
-<option value="cm">Centimeter</option>
-</select>
-
-<label>To</label>
-<select id="unitTo">
-<option value="meter">Meter</option>
-<option value="feet">Feet</option>
-<option value="inch">Inch</option>
-<option value="cm">Centimeter</option>
-</select>
-
-<button class="calc-btn" onclick="unitCalc()">Convert</button>
-
-<div class="result" id="unitResult">Result will appear here.</div>
-</div>
-
-<!-- REBAR -->
-<div class="card">
-<h3>🔩 Rebar Calculator</h3>
-
-<label>Bar Diameter (mm)</label>
-<input id="rebarDia" type="number" step="any">
-
-<label>Length per Bar (m)</label>
-<input id="rebarLength" type="number" step="any">
-
-<label>Number of Bars</label>
-<input id="rebarBars" type="number" step="any">
-
-<button class="calc-btn" onclick="rebarCalc()">Calculate Rebar Weight</button>
-
-<div class="result" id="rebarResult">Result will appear here.</div>
+<div class="result" id="steelResult"></div>
 </div>
 
 </div>
-
-<!-- SEO -->
-<section class="seo-section">
-
-<h2>📚 Civil Engineering Calculators Online</h2>
-
-<p>
-CivilCalcAI is a free online collection of civil engineering calculation tools.
-It is designed to make common construction calculations faster and easier.
-</p>
-
-<h3>Concrete Volume Calculator</h3>
-<p>
-Concrete volume is calculated using length × width × depth.
-</p>
-
-<h3>Steel Weight Calculator</h3>
-<p>
-The commonly used theoretical formula for round steel is d² ÷ 162 kg/m.
-</p>
-
-<h3>Brick Calculator</h3>
-<p>
-The brick calculator gives an approximate brick quantity based on wall area.
-Actual quantity may vary depending on brick size, mortar and wastage.
-</p>
-
-<h3>Who can use CivilCalcAI?</h3>
-
-<ul>
-<li>Civil engineering students</li>
-<li>Site supervisors</li>
-<li>Contractors</li>
-<li>Construction workers</li>
-<li>Engineers and technicians</li>
-</ul>
-
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="seo-section">
-
-<div class="section-title">
-<h2>❓ Frequently Asked Questions</h2>
-</div>
-
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFaq(this)">
-What is a concrete volume calculator?
-</div>
-<div class="faq-answer">
-It calculates rectangular concrete volume using length × width × depth.
-</div>
-</div>
-
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFaq(this)">
-How is steel weight calculated?
-</div>
-<div class="faq-answer">
-A commonly used theoretical formula is d² ÷ 162 kg/m.
-</div>
-</div>
-
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFaq(this)">
-Is CivilCalcAI free?
-</div>
-<div class="faq-answer">
-Yes. The calculators are designed to be available for free.
-</div>
-</div>
-
-</section>
-
-<!-- HISTORY -->
-<section id="history" class="container">
-
-<div class="section-title">
-<h2>📋 Calculation History</h2>
-</div>
-
-<div class="history-box">
-<div id="historyList">No calculations yet.</div>
-<button class="clear-btn" onclick="clearHistory()">🗑️ Clear History</button>
-</div>
-
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="container">
-
-<div class="about">
-
-<h2>ℹ️ About CivilCalcAI</h2>
-
-<p>
-CivilCalcAI is a simple civil engineering calculator website
-created to make common construction calculations easier and faster.
-</p>
-
-<p>
-The project includes concrete volume, brick quantity, steel weight,
-rebar weight, material estimation, construction cost, area,
-volume and unit conversion tools.
-</p>
-
-</div>
-
-</section>
-
-<footer>
-<p>© 2026 CivilCalcAI</p>
-<p>Free Civil Engineering Calculators</p>
-</footer>
 
 <script>
 
-function saveHistory(text){
-    let history=JSON.parse(localStorage.getItem("civilHistory")||"[]");
-    history.unshift(text);
-    history=history.slice(0,20);
-    localStorage.setItem("civilHistory",JSON.stringify(history));
-    showHistory();
+function calculateConcrete(){
+
+const length = parseFloat(document.getElementById("length").value);
+const width = parseFloat(document.getElementById("width").value);
+const depth = parseFloat(document.getElementById("depth").value);
+
+if(isNaN(length) || isNaN(width) || isNaN(depth)){
+document.getElementById("concreteResult").innerHTML =
+"⚠️ Please enter all values.";
+return;
 }
 
-function showHistory(){
-    let history=JSON.parse(localStorage.getItem("civilHistory")||"[]");
-    let box=document.getElementById("historyList");
+const volume = length * width * depth;
 
-    if(history.length===0){
-        box.innerHTML="No calculations yet.";
-        return;
-    }
-
-    box.innerHTML=history.map(x =>
-        `<div class="history-item">${x}</div>`
-    ).join("");
+document.getElementById("concreteResult").innerHTML =
+"Concrete Volume = " + volume.toFixed(3) + " m³";
 }
 
-function clearHistory(){
-    localStorage.removeItem("civilHistory");
-    showHistory();
+
+function calculateBricks(){
+
+const length = parseFloat(document.getElementById("wallLength").value);
+const height = parseFloat(document.getElementById("wallHeight").value);
+
+if(isNaN(length) || isNaN(height)){
+document.getElementById("brickResult").innerHTML =
+"⚠️ Please enter all values.";
+return;
 }
 
-function scrollToCalc(id){
-    document.getElementById(id).scrollIntoView({
-        behavior:"smooth"
-    });
+const wallArea = length * height;
+const bricks = wallArea * 60;
+
+document.getElementById("brickResult").innerHTML =
+"Approx. Bricks Required = " + Math.ceil(bricks);
 }
 
-function concreteCalc(){
 
-    let l=parseFloat(document.getElementById("conLength").value);
-    let w=parseFloat(document.getElementById("conWidth").value);
-    let d=parseFloat(document.getElementById("conDepth").value);
+function calculateSteel(){
 
-    if(isNaN(l)||isNaN(w)||isNaN(d)){
-        alert("Please enter all values.");
-        return;
-    }
+const diameter = parseFloat(document.getElementById("diameter").value);
+const length = parseFloat(document.getElementById("steelLength").value);
 
-    let result=l*w*d;
-
-    let text=`Concrete Volume = ${result.toFixed(3)} m³`;
-
-    document.getElementById("conResult").innerText=text;
-    saveHistory(text);
+if(isNaN(diameter) || isNaN(length)){
+document.getElementById("steelResult").innerHTML =
+"⚠️ Please enter all values.";
+return;
 }
 
-function brickCalc(){
+const weightPerMeter = (diameter * diameter) / 162;
+const totalWeight = weightPerMeter * length;
 
-    let l=parseFloat(document.getElementById("brickLength").value);
-    let h=parseFloat(document.getElementById("brickHeight").value);
-
-    if(isNaN(l)||isNaN(h)){
-        alert("Please enter all values.");
-        return;
-    }
-
-    let area=l*h;
-    let bricks=area*60;
-
-    let text=`Wall Area = ${area.toFixed(2)} m² | Approx Bricks = ${Math.ceil(bricks)}`;
-
-    document.getElementById("brickResult").innerText=text;
-    saveHistory(text);
+document.getElementById("steelResult").innerHTML =
+"Weight per metre = " + weightPerMeter.toFixed(2) + " kg/m<br>" +
+"Total Steel Weight = " + totalWeight.toFixed(2) + " kg";
 }
 
-function steelCalc(){
+</script>
 
-    let d=parseFloat(document.getElementById("steelDia").value);
-    let l=parseFloat(document.getElementById("steelLength").value);
-
-    if(isNaN(d)||isNaN(l)){
-        alert("Please enter all values.");
-        return;
-    }
-
-    let unitWeight=(d*d)/162;
-    let total=unitWeight*l;
-
-    let text=`Steel Weight = ${total.toFixed(2)} kg`;
-
-    document.getElementById("steelResult").innerText=text;
-    saveHistory(text);
-}
-
-function mixCalc(){
-
-    let volume=parseFloat(document.getElementById("mixVol").value);
-    let c=parseFloat(document.getElementById("cementRatio").value);
-    let s=parseFloat(document.getElementById("sandRatio").value);
-    let a=parseFloat(document.getElementById("aggRatio").value);
-
-    if([volume,c,s,a].some(isNaN)){
-        alert("Please enter all values.");
-        return;
-    }
-
-    let total=c+s+a;
-
-    let cement=volume*c/total;
-    let sand=volume*s/total;
-    let aggregate=volume*a/total;
-
-    let text=`Cement = ${cement.toFixed(3)} m³ | Sand = ${sand.toFixed(3)} m³ | Aggregate = ${aggregate.toFixed(3)} m³`;
-
-    document.getElementById("mixResult").innerText=text;
-    saveHistory(text);
-}
-
-function costCalc(){
-
-    let cq=parseFloat(document.getElementById("cementQty").value)||0;
-    let cr=parseFloat(document.getElementById("cementRate").value)||0;
-
-    let sq=parseFloat(document.getElementById("sandQty").value)||0;
-    let sr=parseFloat(document.getElementById("sandRate").value)||0;
-
-    let aq=parseFloat(document.getElementById("aggQty").value)||0;
-    let ar=parseFloat(document.getElementById("aggRate").value)||0;
-
-    let total=(cq*cr)+(sq*sr)+(aq*ar);
-
-    let text=`Estimated Material Cost = ₹${total.toFixed(2)}`;
-
-    document.getElementById("costResult").innerText=text;
-    saveHistory(text);
-}
-
-function updateAreaFields(){
-
-    let shape=document.getElementById("areaShape").value;
-    let box=document.getElementById("areaFields");
-
-    if(shape==="rectangle"){
-        box.innerHTML=`
-        <label>Length (m)</label>
-        <input id="areaL" type="number" step="any">
-        <label>Width (m)</label>
-        <input id="areaW" type="number" step="any">
-        `;
-    }
-
-    if(shape==="triangle"){
-        box.innerHTML=`
-        <label>Base (m)</label>
-        <input id="areaB" type="number" step="any">
-        <label>Height (m)</label>
-        <input id="areaH" type="number" step="any">
-        `;
-    }
-
-    if(shape==="circle"){
-        box.innerHTML=`
-        <label>Radius (m)</label>
-        <input id="areaR" type="number" step="any">
-        `;
-    }
-}
-
-function areaCalc(){
-
-    let shape=document.getElementById("areaShape").value;
-    let result=0;
-
-    if(shape==="rectangle"){
-        result=parseFloat(areaL.value)*parseFloat(areaW.value);
-    }
-
-    if(shape==="triangle"){
-        result=0.5*parseFloat(areaB.value)*parseFloat(areaH.value);
-    }
-
-    if(shape==="circle"){
-        result=Math.PI*Math.pow(parseFloat(areaR.value),2);
-    }
-
-    if(isNaN(result)){
-        alert("Please enter all values.");
-        return;
-    }
-
-    let text=`Area = ${result.toFixed(3)} m²`;
-
-    document.getElementById("areaResult").innerText=text;
-    saveHistory(text);
-}
-
-function updateVolumeFields(){
-
-    let shape=document.getElementById("volumeShape").value;
-    let box=document.getElementById("volumeFields");
-
-    if(shape==="cuboid"){
-        box.innerHTML=`
-        <label>Length (m)</label>
-        <input id="volL" type="number" step="any">
-        <label>Width (m)</label>
-        <input id="volW" type="number" step="any">
-        <label>Height (m)</label>
-        <input id="volH" type="number" step="any">
-        `;
-    }
-
-    if(shape==="cylinder"){
-        box.innerHTML=`
-        <label>Radius (m)</label>
-        <input id="volR" type="number" step="any">
-        <label>Height (m)</label>
-        <input id="volCH" type="number" step="any">
-        `;
-    }
-}
-
-function volumeCalc(){
-
-    let shape=document.getElementById("volumeShape").value;
-    let result=0;
-
-    if(shape==="cuboid"){
-      
+</body>
+</html>
